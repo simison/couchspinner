@@ -1,4 +1,4 @@
-# Couch Spinner
+# CouchSpinner
 
 ## Available Scripts
 
