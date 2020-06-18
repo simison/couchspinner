@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+.Profile {
+  background: #f1efea;
+  color: #27374c;
+  font-family: Lato, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-feature-settings: 'kern', 'liga', 'pnum';
+  line-height: 1.5;
+  min-height: 100vh;
+  padding: 50px;
+  border: 5px solid transparent;
+}
+
+.is-dropping .Profile {
+  background-color: #fdf7e7;
+  border-color: #ed6504;
+}
+
+.is-dropping .Profile * {
+  opacity: 0.8;
+}
+
+.Profile a {
+  color: #287fb8;
+  text-decoration: none;
+}
+
+.Profile a:active,
+.Profile a:focus,
+.Profile a:hover {
+  color: #ed6504;
+  text-decoration: none;
+}
+
+.Profile-section {
+  background-color: #fff;
+  border-bottom: 2px solid rgba(0,0,0,0.15);
+  border-radius: 2px;
+  margin: 10px auto;
+}
+
+.Profile-section p {
+  margin: 0 0 1em 0;
+}
+
+.Profile-section-heading {
+  padding: 20px;
+  border-bottom: 1px solid #e6e6e6;
+  font-size: 1em;
+  text-transform: uppercase;
+  word-break: break-word;
+  font-weight: bold;
+}
+
+.Profile-section-content {
+  overflow-wrap: break-word;
+  padding: 20px;
+  word-break: break-word;
+}

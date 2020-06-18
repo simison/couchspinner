@@ -1,13 +1,18 @@
 {
-  "name": "couchsurfing-preview",
-  "version": "0.1.0",
+  "name": "couch-spinner",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@wordpress/browserslist-config": "^2.6.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jszip": "^3.5.0",
+    "marked": "^1.1.0",
+    "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-dropzone": "^11.0.1",
     "react-scripts": "3.4.1"
   },
   "scripts": {
@@ -16,19 +21,15 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "extends @wordpress/browserslist-config"
     ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "license": "GPL-3.0-or-later"
 }
