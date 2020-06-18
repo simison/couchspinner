@@ -8,6 +8,7 @@ import AboutMe from './AboutMe';
 import Messages from './Messages';
 import Friends from './Friends';
 import Raw from './Raw';
+import classnames from 'classnames';
 
 function Profile({profile, images, fileDate}) {
   const { user_data: user, interests, references, friends, messages } = profile;
@@ -45,7 +46,7 @@ function Profile({profile, images, fileDate}) {
               ].map(({slug, label, count}) => (
                 <li key={slug}>
                   <button
-                    className={ slug === page ? 'is-active' : '' }
+                    className={ classnames( { 'is-active': slug === page } ) }
                     onClick={ () => setPage(slug) }
                   >
                     { label }

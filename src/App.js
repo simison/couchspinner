@@ -1,6 +1,7 @@
 import React, {useCallback, useState} from 'react'
 import {useDropzone} from 'react-dropzone'
 import jszip from 'jszip';
+import classnames from 'classnames';
 
 import './App.css';
 import Intro from './Intro';
@@ -85,7 +86,7 @@ function App() {
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
 
   return (
-    <div className={ `App${isDragActive ? ' is-dropping' : ''}` } {...getRootProps()}>
+    <div className={ classnames( 'App', { 'is-dropping': isDragActive } ) } {...getRootProps()}>
       { profile
         ? <Profile profile={ profile } images={ profileImages } fileDate={ fileDate } />
         : <Intro isDragActive={ isDragActive } input={ <input {...getInputProps() } />} />
