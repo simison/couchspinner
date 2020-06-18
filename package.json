@@ -6,10 +6,8 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@wordpress/browserslist-config": "^2.6.0",
-    "eslint-plugin-prettier": "^3.1.4",
     "jszip": "^3.5.0",
     "marked": "^1.1.0",
-    "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.0.1",
@@ -21,6 +19,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "browserslist": {
     "production": [
