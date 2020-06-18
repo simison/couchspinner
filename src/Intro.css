@@ -1,0 +1,43 @@
+.Intro {
+  align-items: center;
+  background-color: #282c34;
+  border: 5px solid transparent;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.Intro a {
+  color: #61dafb;
+}
+
+.Intro-logo {
+  height: 40vmin;
+  margin: 30px;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .Intro-logo {
+    animation: Intro-logo-spin infinite 20s linear;
+  }
+}
+
+.is-dropping .Intro {
+  background-color: #363c48;
+  border-color: #f1cb85;
+}
+
+@keyframes Intro-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

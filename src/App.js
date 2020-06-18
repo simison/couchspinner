@@ -2,8 +2,8 @@ import React, {useCallback, useState} from 'react'
 import {useDropzone} from 'react-dropzone'
 import jszip from 'jszip';
 
-import sofa from './sofa.svg';
 import './App.css';
+import Intro from './Intro';
 import Profile from './Profile';
 const exampleProfile = false;
 
@@ -45,23 +45,6 @@ async function extractZip(file) {
       json,
       images,
     };
-}
-
-function Intro({isDragActive, input}) {
-  return (
-    <div className="Intro">
-      <p>CouchSpinner</p>
-      { /* https://www.flaticon.com/free-icon/sofa_2965901?term=sofa&page=1&position=39 */ }
-      <img src={sofa} className="Intro-logo" alt="logo" />
-      { input }
-      {
-        isDragActive ?
-          <p>Drop the file here...</p> :
-          <p>Drop the file here, or click to select files.</p>
-      }
-      <p>By <a onClick={event => { event.preventDefault() }} href="https://www.trustroots.org/">Trustroots</a></p>
-    </div>
-  );
 }
 
 function App() {
