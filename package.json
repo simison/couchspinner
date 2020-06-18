@@ -1,11 +1,13 @@
 {
   "name": "couchspinner",
   "private": true,
+  "homepage": "https://couchspinner.com",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@wordpress/browserslist-config": "^2.6.0",
+    "gh-pages": "^3.0.0",
     "jszip": "^3.5.0",
     "marked": "^1.1.0",
     "react": "^16.13.1",
@@ -15,6 +17,8 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
