@@ -7,7 +7,7 @@ import './App.css';
 import Intro from './Intro';
 import Profile from './Profile';
 // import example from './example-profile.json';
-const exampleProfile = false;
+const EXAMPLE_PROFILEE = false;
 
 async function getJsonFromZip(zip) {
   const files = zip.filter((relativePath, zipEntry) => {
@@ -21,7 +21,7 @@ async function getJsonFromZip(zip) {
   const jsonString = await zip.file(files[0].name).async('string');
 
   try {
-    const json = JSON.parse(jsonString)
+    const json = JSON.parse(jsonString);
     return json;
   } catch {
     return false;
@@ -38,18 +38,18 @@ function getImagesFromZip(zip) {
 }
 
 async function extractZip(file) {
-    const zip = await jszip.loadAsync(file); // .then(async (zip) => {
-    const json = await getJsonFromZip(zip);
-    const images = await getImagesFromZip(zip);
+  const zip = await jszip.loadAsync(file);
+  const json = await getJsonFromZip(zip);
+  const images = await getImagesFromZip(zip);
 
-    return {
-      json,
-      images,
-    };
+  return {
+    json,
+    images,
+  };
 }
 
 function App() {
-  const [profile, setProfile] = useState(exampleProfile);
+  const [profile, setProfile] = useState(EXAMPLE_PROFILEE);
   const [profileImages, setProfileImages] = useState({});
   const [fileDate, setFileDate] = useState(false);
 
@@ -69,7 +69,7 @@ function App() {
     setFileDate(file.lastModifiedDate);
 
     if (file.type === 'application/zip') {
-      const { json, images } = extractZip(file);
+      const { json, images } = await extractZip(file);
       setProfile(json);
       setProfileImages(images);
     } else if (file.type === 'application/json') {
