@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Section, Heading, Content } from './components';
+import { Section, Heading } from './components';
 import JsonTree from 'react-json-tree';
 import './Raw.css';
 

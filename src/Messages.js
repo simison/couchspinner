@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Section, Heading, Content, CsProfileLink } from './components';
+import { Section, Heading, Content } from './components';
 import './Messages.css';
 
 function Messages({messages}) {
@@ -10,7 +10,7 @@ function Messages({messages}) {
       <Content>
         { messages.length ? (
           <div>
-          message
+          Messages coming up...
           </div>
         ) : 'No messages. :-(' }
       </Content>

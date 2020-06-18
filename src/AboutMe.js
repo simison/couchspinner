@@ -1,7 +1,6 @@
 import marked from 'marked';
 import React from 'react'
 
-import { formatDate } from './utils';
 import { Section, Heading, Content } from './components';
 import './AboutMe.css';
 

@@ -41,7 +41,6 @@ async function extractZip(file) {
     const json = await getJsonFromZip(zip);
     const images = await getImagesFromZip(zip);
 
-    console.log(json,images);
     return {
       json,
       images,
@@ -49,7 +48,7 @@ async function extractZip(file) {
 }
 
 function App() {
-  const [profile, setProfile] = useState(exampleProfile || false);
+  const [profile, setProfile] = useState(exampleProfile);
   const [profileImages, setProfileImages] = useState({});
   const [fileDate, setFileDate] = useState(false);
 
