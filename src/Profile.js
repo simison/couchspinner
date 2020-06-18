@@ -1,87 +1,66 @@
-import React from 'react'
-import marked from 'marked';
+import React, { useState } from 'react'
 
 import './Profile.css';
+import { Section, CsProfileLink } from './components';
+import { formatDate } from './utils';
+import References from './References';
+import AboutMe from './AboutMe';
+import Messages from './Messages';
+import Friends from './Friends';
+import Raw from './Raw';
 
-function Section({children}) {
-  return <div className="Profile-section">{children}</div>
-}
+function Profile({profile, images, fileDate}) {
+  const { user_data: user, interests, references, friends, messages } = profile;
+  const [page, setPage] = useState('about-me');
 
-function Heading({children}) {
-  return <div className="Profile-section-heading">{children}</div>
-}
-
-function Content(props) {
-  return <div className="Profile-section-content" {...props}>{props.children}</div>
-}
-
-function Profile({profile, images}) {
-  const { user_data: user, interests } = profile;
-
-  console.log(' interests:',interests);
+  const referencesCount = (references?.written_references?.length ?? 0) + (references?.received_references?.length ?? 0);
+  const friendsCount = friends?.friends?.length ?? 0;
+  const messagesCount = messages?.messages?.length ?? 0;
 
   return (
     <>
       <div className="Profile">
-        <p>Your Couchsurfing.com profile</p>
-
-        <h1>
-        { user?.profile?.first_name && `${user.profile.first_name} ` }
-        { user?.profile?.last_name && `${user.profile.last_name} ` }
-        { user?.username && `(${user.username})` }
-        </h1>
+        <div className="Profile-header">
+          <p><em>
+            <CsProfileLink id={user?.id}>Your Couchsurfing.com profile</CsProfileLink>
+            { fileDate && ` as of ${ formatDate(fileDate) }` }
+          </em></p>
+          <h1>
+            { user?.profile?.first_name && `${user.profile.first_name} ` }
+            { user?.profile?.last_name && `${user.profile.last_name} ` }
+            { user?.username && `(${user.username})` }
+          </h1>
+          { user?.profile?.occupation && <h3>{ user.profile.occupation }</h3> }
+        </div>
 
         <Section>
-          <Heading>About me</Heading>
-          <Content>
-          { user?.profile?.about_me && (
-            <span dangerouslySetInnerHTML={{ __html: marked(user.profile.about_me) }} />
-          ) }
-          { user?.profile?.interests && (
-            <>
-              <p><strong>More about my interests</strong></p>
-              <span dangerouslySetInnerHTML={{ __html: marked(user.profile.interests) }} />
-              { interests?.interests && (
-                <ul>
-                { interests.interests.forEach(interest => (
-                  <li key={interest.name}>{interest.name}</li>
-                )) }
-                </ul>
-              ) }
-            </>
-          ) }
-          { user?.profile?.media && (
-            <>
-              <p><strong>My Favorite Music, Movies & Books</strong></p>
-              <span dangerouslySetInnerHTML={{ __html: marked(user.profile.media) }} />
-            </>
-          ) }
-          { user?.profile?.teach && (
-            <>
-              <p><strong>Teach, Learn, Share</strong></p>
-              <span dangerouslySetInnerHTML={{ __html: marked(user.profile.teach) }} />
-            </>
-          ) }
-          { user?.profile?.amazing_thing && (
-            <>
-              <p><strong>One Amazing Thing I've Done</strong></p>
-              <span dangerouslySetInnerHTML={{ __html: marked(user.profile.amazing_thing) }} />
-            </>
-          ) }
-          { user?.profile?.surf_reason && (
-            <>
-              <p><strong>Why I'm on Couchsurfing</strong></p>
-              <span dangerouslySetInnerHTML={{ __html: marked(user.profile.surf_reason) }} />
-            </>
-          ) }
-          { user?.profile?.offer_hosts && (
-            <>
-              <p><strong>What I Can Share With Hosts</strong></p>
-              <span dangerouslySetInnerHTML={{ __html: marked(user.profile.offer_hosts) }} />
-            </>
-          ) }
-          </Content>
+          <ul className="Profile-tabs">
+            {
+              [
+                { slug: 'about-me', label: 'About me' },
+                { slug: 'references', label: 'References', count: referencesCount },
+                { slug: 'friends', label: 'Friends', count: friendsCount },
+                { slug: 'messages', label: 'Messages', count: messagesCount },
+                { slug: 'raw', label: 'Raw' }
+              ].map(({slug, label, count}) => (
+                <li key={slug}>
+                  <button
+                    className={ slug === page ? 'is-active' : '' }
+                    onClick={ () => setPage(slug) }
+                  >
+                    { label }
+                    { count && <span className="Profile-tab-count">{ count }</span> }
+                  </button>
+                </li>
+              ))
+            }
+          </ul>
         </Section>
+        { page === 'about-me' && <AboutMe user={ user } interests={ interests } /> }
+        { page === 'references' && <References references={ references } /> }
+        { page === 'friends' && <Friends friends={ friends?.friends || [] } /> }
+        { page === 'messages' && <Messages messages={ messages?.messages || [] } /> }
+        { page === 'raw' && <Raw json={ profile } /> }
       </div>
     </>
   );

@@ -1,0 +1,30 @@
+.Profile-reference {
+  padding: 30px 0;
+  border-top: 1px solid #e6e6e6;
+}
+
+.Profile-reference-meta {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Profile-reference-experience {
+  font-weight: bold;
+}
+
+.Profile-reference-experience-positive {
+  color: #41b866;
+}
+
+.Profile-reference-experience-neutral {
+  color: #ED6504;
+}
+
+.Profile-reference-experience-negative {
+  color: #c63d43;
+}
+
+.Profile-reference-date {
+  color: #929EAE;
+  font-size: 0.9em;
+}

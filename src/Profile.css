@@ -2,22 +2,18 @@
 
 .Profile {
   background: #f1efea;
+  border: 5px solid transparent;
   color: #27374c;
   font-family: Lato, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   font-feature-settings: 'kern', 'liga', 'pnum';
   line-height: 1.5;
   min-height: 100vh;
   padding: 50px;
-  border: 5px solid transparent;
 }
 
-.is-dropping .Profile {
-  background-color: #fdf7e7;
-  border-color: #ed6504;
-}
-
-.is-dropping .Profile * {
-  opacity: 0.8;
+.Profile-header {
+  margin: 10px auto;
+  max-width: 980px;
 }
 
 .Profile a {
@@ -32,28 +28,64 @@
   text-decoration: none;
 }
 
-.Profile-section {
-  background-color: #fff;
-  border-bottom: 2px solid rgba(0,0,0,0.15);
-  border-radius: 2px;
-  margin: 10px auto;
+.Profile-tabs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding: 10px 20px;
 }
 
-.Profile-section p {
-  margin: 0 0 1em 0;
+.Profile-tabs li {
+  display: inline-block;
+  margin: 10px 30px 10px 0;
+  vertical-align: middle;
 }
 
-.Profile-section-heading {
-  padding: 20px;
-  border-bottom: 1px solid #e6e6e6;
+.Profile-tabs li button {
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: #287FB8;
+  cursor: pointer;
   font-size: 1em;
-  text-transform: uppercase;
-  word-break: break-word;
-  font-weight: bold;
+  margin: 0;
+  outline: none;
+  padding: 5px 0;
 }
 
-.Profile-section-content {
-  overflow-wrap: break-word;
-  padding: 20px;
-  word-break: break-word;
+.Profile-tabs li button.is-active,
+.Profile-tabs li button:hover,
+.Profile-tabs li button:focus {
+  color: #ed6504;
+}
+.Profile-tabs li button.is-active {
+  border-color: rgba(0,0,0,0.15);
+}
+
+.Profile-tab-count {
+  border-radius: 3.75em;
+  color: #fff;
+  background: #287FB8;
+  display: inline-block;
+  font-size: 0.8em;
+  font-weight: bold;
+  line-height: 1;
+  margin-left: 10px;
+  padding: 4px 7px;
+  vertical-align: 1px;
+}
+
+.Profile-tabs li button.is-active .Profile-tab-count,
+.Profile-tabs li button:hover .Profile-tab-count,
+.Profile-tabs li button:focus .Profile-tab-count {
+  background: #ed6504;
+}
+
+.is-dropping .Profile {
+  background-color: #fdf7e7;
+  border-color: #ed6504;
+}
+
+.is-dropping .Profile * {
+  opacity: 0.8;
 }

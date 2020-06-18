@@ -5,6 +5,7 @@ import jszip from 'jszip';
 import './App.css';
 import Intro from './Intro';
 import Profile from './Profile';
+// import example from './example-profile.json';
 const exampleProfile = false;
 
 async function getJsonFromZip(zip) {
@@ -50,6 +51,7 @@ async function extractZip(file) {
 function App() {
   const [profile, setProfile] = useState(exampleProfile || false);
   const [profileImages, setProfileImages] = useState({});
+  const [fileDate, setFileDate] = useState(false);
 
   const onDrop = useCallback(async acceptedFiles => {
     console.log('acceptedFiles:',acceptedFiles);
@@ -63,6 +65,8 @@ function App() {
     if (!['application/zip', 'application/json'].includes(file.type)) {
       return alert('Please drop either the zip file or json file, e.g. "couchsurfing-export-123456-202005200751.zip", or "123456-202005200751.json"');
     }
+
+    setFileDate(file.lastModifiedDate);
 
     if (file.type === 'application/zip') {
       const { json, images } = extractZip(file);
@@ -84,7 +88,7 @@ function App() {
   return (
     <div className={ `App${isDragActive ? ' is-dropping' : ''}` } {...getRootProps()}>
       { profile
-        ? <Profile profile={ profile } images={ profileImages } />
+        ? <Profile profile={ profile } images={ profileImages } fileDate={ fileDate } />
         : <Intro isDragActive={ isDragActive } input={ <input {...getInputProps() } />} />
       }
     </div>
