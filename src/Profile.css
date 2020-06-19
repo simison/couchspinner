@@ -41,7 +41,7 @@
   vertical-align: middle;
 }
 
-.Profile-tabs li button {
+.Profile-tabs li a {
   background: none;
   border: 0;
   border-bottom: 2px solid transparent;
@@ -53,12 +53,12 @@
   padding: 5px 0;
 }
 
-.Profile-tabs li button.is-active,
-.Profile-tabs li button:hover,
-.Profile-tabs li button:focus {
+.Profile-tabs li a.is-active,
+.Profile-tabs li a:hover,
+.Profile-tabs li a:focus {
   color: #ed6504;
 }
-.Profile-tabs li button.is-active {
+.Profile-tabs li a.is-active {
   border-color: rgba(0,0,0,0.15);
 }
 
@@ -75,9 +75,9 @@
   vertical-align: 1px;
 }
 
-.Profile-tabs li button.is-active .Profile-tab-count,
-.Profile-tabs li button:hover .Profile-tab-count,
-.Profile-tabs li button:focus .Profile-tab-count {
+.Profile-tabs li a.is-active .Profile-tab-count,
+.Profile-tabs li a:hover .Profile-tab-count,
+.Profile-tabs li a:focus .Profile-tab-count {
   background: #ed6504;
 }
 
