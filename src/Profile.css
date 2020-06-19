@@ -89,3 +89,14 @@
 .is-dropping .Profile * {
   opacity: 0.8;
 }
+
+.promo {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 300;
+  margin-top: 40px;
+}
+
+.promo .tr-logo {
+  width: 50px;
+}

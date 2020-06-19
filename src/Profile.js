@@ -9,6 +9,7 @@ import Messages from './Messages';
 import Friends from './Friends';
 import Raw from './Raw';
 import classnames from 'classnames';
+import TrustrootsTree from './trustroots-tree.svg';
 
 function Profile({profile, images, fileDate}) {
   const { user_data: user, interests, references, friends, messages } = profile;
@@ -62,6 +63,13 @@ function Profile({profile, images, fileDate}) {
         { page === 'friends' && <Friends friends={ friends?.friends || [] } /> }
         { page === 'messages' && <Messages messages={ messages?.messages || [] } /> }
         { page === 'raw' && <Raw json={ profile } /> }
+        <div className="promo">
+          <a href="https://www.trustroots.org/?ref=couchspinner" target="_blank" rel="noopener noreferrer">
+            <img src={TrustrootsTree} className="tr-logo" alt="Trustroots" /><br />
+            Join Trustroots.org<br />
+            Travellers hospitality community.
+          </a>
+        </div>
       </div>
     </>
   );
