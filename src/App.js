@@ -1,5 +1,5 @@
-import React, {useCallback, useState, createRef} from 'react'
-import {useDropzone} from 'react-dropzone'
+import React, {useCallback, useState, createRef} from 'react';
+import {useDropzone} from 'react-dropzone';
 import jszip from 'jszip';
 import classnames from 'classnames';
 
@@ -29,13 +29,25 @@ async function getJsonFromZip(zip) {
   }
 }
 
-function getImagesFromZip(zip) {
-  // eslint-disable-next-line
+async function getImagesFromZip(zip) {
   const files =  zip.filter((relativePath, zipEntry) => {
     return !zipEntry.dir && ['jpg', 'gif', 'png'].includes(zipEntry.name.split('.').pop());
   });
 
-  return {};
+  const imageProcessor = files.map(async (file) => {
+    const blob = await zip.file(file.name).async('blob');
+    const urlCreator = window.URL || window.webkitURL;
+    const blobUrl = urlCreator.createObjectURL(blob);
+
+    return {
+      blobUrl,
+      id: file.name,
+    };
+  });
+
+  const images = await Promise.all(imageProcessor);
+
+  return images;
 }
 
 async function extractZip(file) {

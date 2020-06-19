@@ -7,13 +7,14 @@ import {
 } from "react-router-dom";
 
 import './Profile.css';
-import { Section, CsProfileLink } from './components';
 import { formatDate } from './utils';
-import References from './References';
+import { Section, CsProfileLink } from './components';
 import AboutMe from './AboutMe';
-import Messages from './Messages';
 import Friends from './Friends';
+import Images from './Images';
+import Messages from './Messages';
 import Raw from './Raw';
+import References from './References';
 import TrustrootsTree from './trustroots-tree.svg';
 
 function Profile({profile, images, fileDate}) {
@@ -21,12 +22,14 @@ function Profile({profile, images, fileDate}) {
 
   const referencesCount = (references?.written_references?.length ?? 0) + (references?.received_references?.length ?? 0);
   const friendsCount = friends?.friends?.length ?? 0;
-  const messagesCount = messages?.messages?.length ?? 0;
+  // const messagesCount = messages?.messages?.length ?? 0;
+  const imagesCount = images?.length ?? 0;
   const routes = [
     { route: '/', label: 'About me' },
     { route: '/references', label: 'References', count: referencesCount },
     { route: '/friends', label: 'Friends', count: friendsCount },
-    { route: '/messages', label: 'Messages', count: messagesCount },
+    // { route: '/messages', label: 'Messages', count: messagesCount },
+    { route: '/images', label: 'Images', count: imagesCount },
     { route: '/raw', label: 'Raw' }
   ];
 
@@ -52,7 +55,7 @@ function Profile({profile, images, fileDate}) {
               <li key={route}>
                 <NavLink activeClassName="is-active" to={ route }>
                   { label }
-                  { count && <span className="Profile-tab-count">{ count }</span> }
+                  { !! count && <span className="Profile-tab-count">{ count }</span> }
                 </NavLink>
               </li>
             )) }
@@ -71,6 +74,9 @@ function Profile({profile, images, fileDate}) {
           </Route>
           <Route path="/messages">
             <Messages messages={ messages?.messages || [] } />
+          </Route>
+          <Route path="/images">
+            <Images images={ images } />
           </Route>
           <Route path="/raw">
             <Raw json={ profile } />
