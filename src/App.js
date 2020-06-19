@@ -1,13 +1,14 @@
-import React, {useCallback, useState, useEffect, createRef} from 'react';
 import {useDropzone} from 'react-dropzone';
-import jszip from 'jszip';
 import classnames from 'classnames';
+import jszip from 'jszip';
+import React, {useCallback, useState, useEffect, createRef} from 'react';
 
 import './App.css';
+import { fetchUserProfiles } from './worker';
+import { STORAGE_PREFIX } from './constants';
 import About from './About';
 import Intro from './Intro';
 import Profile from './Profile';
-import { STORAGE_PREFIX } from './constants';
 // import example from './example-profile.json';
 const EXAMPLE_PROFILE = false;
 
@@ -62,6 +63,26 @@ async function extractZip(file) {
   };
 }
 
+function collectUserIds(profile) {
+  const { references, friends } = profile;
+
+  // Pull lists of IDs we're interested
+  // Basically just other people's IDs, not your own
+  const idsFromReceivedReferences = references ? references.received_references.map(reference => reference.creator_id) : [];
+  const idsFromWrittenReferences = references ? references.written_references.map(reference => reference.recipient_id) : [];
+  const idsFromFriends = friends ? friends.friends.map(friend => parseInt(friend.profile.replace('https://www.couchsurfing.com/users/', ''), 10)) : [];
+
+  // Combine above arrays
+  const all = [
+    ...idsFromReceivedReferences,
+    ...idsFromWrittenReferences,
+    ...idsFromFriends,
+  ];
+
+  // Use Set to create unique array
+  return [...new Set(all)];
+}
+
 function App() {
   // Re-hydrade previous cache
   const cachedProfile = JSON.parse(window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile`));
@@ -78,6 +99,12 @@ function App() {
     window.sessionStorage.setItem(`${STORAGE_PREFIX}_profile`, JSON.stringify(profile));
     window.sessionStorage.setItem(`${STORAGE_PREFIX}_profile_images`, JSON.stringify(profileImages));
   }, [profile, profileImages]);
+
+  // Send different user IDs from the profile to worker for profile fetching
+  useEffect(() => {
+    const allUserIds = collectUserIds(profile);
+    fetchUserProfiles(allUserIds);
+  }, [profile]);
 
   // On uploading file(s)
   const onDrop = useCallback(async acceptedFiles => {
