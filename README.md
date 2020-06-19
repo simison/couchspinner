@@ -19,7 +19,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ### `yarn deploy`
 
-Ddeploys to GitHub pages.
+Deploys to GitHub pages.
 
 See https://facebook.github.io/create-react-app/docs/deployment for context.
 

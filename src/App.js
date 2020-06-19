@@ -64,20 +64,22 @@ async function extractZip(file) {
 
 function App() {
   // Re-hydrade previous cache
+  const cachedFileDate = window.sessionStorage.getItem(`${STORAGE_PREFIX}_file_date`);
   const cachedProfile = JSON.parse(window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile`));
   const cachedProfileImages = JSON.parse(window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile_images`));
 
   const [profile, setProfile] = useState(cachedProfile || EXAMPLE_PROFILE);
   const [profileImages, setProfileImages] = useState(cachedProfileImages || []);
+  const [fileDate, setFileDate] = useState(cachedFileDate || false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [fileDate, setFileDate] = useState(false);
   const ref = createRef();
 
   // Store for the browser session
   useEffect(() => {
-    window.sessionStorage.setItem(`${STORAGE_PREFIX}_profile`, JSON.stringify(profile));
+    window.sessionStorage.setItem(`${STORAGE_PREFIX}_file_date`, fileDate);
     window.sessionStorage.setItem(`${STORAGE_PREFIX}_profile_images`, JSON.stringify(profileImages));
-  }, [profile, profileImages]);
+    window.sessionStorage.setItem(`${STORAGE_PREFIX}_profile`, JSON.stringify(profile));
+  }, [profile, profileImages, fileDate]);
 
   // On uploading file(s)
   const onDrop = useCallback(async acceptedFiles => {

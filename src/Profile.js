@@ -34,8 +34,9 @@ function Profile({profile, images, fileDate}) {
   ];
 
   const clearCache = () => {
-    window.sessionStorage.removeItem(`${STORAGE_PREFIX}_profile`);
+    window.sessionStorage.removeItem(`${STORAGE_PREFIX}_file_date`);
     window.sessionStorage.removeItem(`${STORAGE_PREFIX}_profile_images`);
+    window.sessionStorage.removeItem(`${STORAGE_PREFIX}_profile`);
   };
 
   return (
@@ -52,7 +53,7 @@ function Profile({profile, images, fileDate}) {
               className="Profile-clear"
               onClick={ clearCache }
             >
-              Clear profile
+              Preview another profile
             </a>
           </p>
           <h1>
