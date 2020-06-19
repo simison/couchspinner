@@ -16,13 +16,14 @@ export function Content(props) {
 }
 
 export function CsProfileLink(props) {
-  return props.id
+  const label = props.children ? props.children : 'Member';
+  return !! props.id
     ? (
       <a {...props} href={`https://www.couchsurfing.com/users/${props.id}`}>
-        { props.id === props.userId ? 'You' : props.children }
+        { props.id === props.userId ? 'You' : label }
       </a>
     )
-    : <span {...props}>{props.children}</span>
+    : <span {...props}>{label}</span>
 }
 
 export function Anchor({id}) {

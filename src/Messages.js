@@ -1,17 +1,65 @@
-import React from 'react'
+import React, { useState } from 'react'
+import marked from 'marked';
 
-import { Section, Heading, Content } from './components';
+import { Section, Heading, Content, CsProfileLink } from './components';
+import { formatDate } from './utils';
 import './Messages.css';
 
-function Messages({messages}) {
+function Messages({messages, userId}) {
+  const [openThread, setOpenThread] = useState(false);
+
   return (
     <Section>
       <Heading>Messages</Heading>
       <Content>
         { messages.length ? (
-          <div>
-          Messages coming up...
-          </div>
+          messages.map(thread => {
+            console.log(thread);
+            // Other profile IDs than your own
+            const profileIds = thread.user_ids_concatenated.split(',').filter(id => id !== userId);
+
+            // Unique ID for message thread
+            const threadId = `${thread?.user_ids_concatenated}-${thread?.created_at}`;
+
+            const hasMessages = !! thread.messages.length;
+            const isThreadOpen = openThread === threadId;
+            const latestMessage = thread.messages.pop()?.body;
+
+            return (
+              <div className="Message" key={threadId}>
+                <div className="Message-meta">
+                  { profileIds.map(profileId => (
+                    <CsProfileLink
+                      id={profileId}
+                      key={profileId}
+                    />
+                  )) }
+                  { thread?.updated_at && (
+                    <span className="Message-date">{formatDate(thread.updated_at)}</span>
+                  ) }
+                </div>
+                { hasMessages && isThreadOpen && (
+                  <div
+                    className="Message-thread"
+                    dangerouslySetInnerHTML={{ __html: marked(latestMessage) }}
+                  />
+                ) }
+                { hasMessages && !isThreadOpen && (
+                  <>
+                    { latestMessage && <div
+                      className="Message-preview"
+                      dangerouslySetInnerHTML={{ __html: marked(latestMessage) }}
+                    /> }
+                    <button className="Message-read" onClick={ setOpenThread(threadId) }>
+                      Read all
+                    </button>
+                  </>
+                ) }
+
+                { !hasMessages && <p className="Message-thread">Empty message.</p> }
+              </div>
+            );
+          })
         ) : 'No messages. :-(' }
       </Content>
     </Section>

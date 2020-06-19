@@ -72,13 +72,13 @@ function Profile({profile, images, fileDate}) {
             <AboutMe user={ user } interests={ interests } />
           </Route>
           <Route path="/references">
-            <References references={ references } userId={user?.id} />
+            <References references={ references } userId={ user?.id } />
           </Route>
           <Route path="/friends">
             <Friends friends={ friends?.friends || [] } />
           </Route>
           <Route path="/messages">
-            <Messages messages={ messages?.messages || [] } />
+            <Messages messages={ messages?.messages || [] } userId={ user?.id } />
           </Route>
           <Route path="/images">
             <Images images={ images } />

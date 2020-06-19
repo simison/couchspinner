@@ -1,0 +1,29 @@
+.Message {
+  padding: 30px 0;
+  border-top: 1px solid #e6e6e6;
+}
+
+.Message-meta {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Message-date {
+  color: #929EAE;
+  font-size: 0.9em;
+}
+
+.Message-preview {
+  max-height: 100px;
+  overflow: hidden;
+  position: relative;
+}
+
+.Message-preview::after {
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+  bottom: 0;
+  content: '';
+  height: 30px;
+  position: absolute;
+  width: 100%;
+}
