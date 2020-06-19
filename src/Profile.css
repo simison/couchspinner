@@ -28,40 +28,6 @@
   text-decoration: none;
 }
 
-.Profile-tabs {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  padding: 10px 20px;
-}
-
-.Profile-tabs li {
-  display: inline-block;
-  margin: 10px 30px 10px 0;
-  vertical-align: middle;
-}
-
-.Profile-tabs li a {
-  background: none;
-  border: 0;
-  border-bottom: 2px solid transparent;
-  color: #287FB8;
-  cursor: pointer;
-  font-size: 1em;
-  margin: 0;
-  outline: none;
-  padding: 5px 0;
-}
-
-.Profile-tabs li a.is-active,
-.Profile-tabs li a:hover,
-.Profile-tabs li a:focus {
-  color: #ed6504;
-}
-.Profile-tabs li a.is-active {
-  border-color: rgba(0,0,0,0.15);
-}
-
 .Profile-tab-count {
   border-radius: 3.75em;
   color: #fff;
@@ -75,9 +41,9 @@
   vertical-align: 1px;
 }
 
-.Profile-tabs li a.is-active .Profile-tab-count,
-.Profile-tabs li a:hover .Profile-tab-count,
-.Profile-tabs li a:focus .Profile-tab-count {
+.Tabs li a.is-active .Profile-tab-count,
+.Tabs li a:hover .Profile-tab-count,
+.Tabs li a:focus .Profile-tab-count {
   background: #ed6504;
 }
 

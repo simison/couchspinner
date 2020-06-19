@@ -32,3 +32,37 @@ h3 .Anchor {
 h3:hover .Anchor {
   display: inline;
 }
+
+.Tabs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding: 10px 20px;
+}
+
+.Tabs li {
+  display: inline-block;
+  margin: 10px 30px 10px 0;
+  vertical-align: middle;
+}
+
+.Tabs li a {
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: #287FB8;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 0;
+  outline: none;
+  padding: 5px 0;
+}
+
+.Tabs li a.is-active,
+.Tabs li a:hover,
+.Tabs li a:focus {
+  color: #ed6504;
+}
+.Tabs li a.is-active {
+  border-color: rgba(0,0,0,0.15);
+}

@@ -28,3 +28,10 @@
   color: #929EAE;
   font-size: 0.9em;
 }
+
+.Profile-reference-response {
+  margin-left: 30px;
+  border: 1px solid rgba(0,0,0,0.15);
+  margin-top: 1em;
+  padding: 10px;
+}

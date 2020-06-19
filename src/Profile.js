@@ -2,13 +2,12 @@ import React from 'react'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  NavLink
+  Route
 } from "react-router-dom";
 
 import './Profile.css';
 import { formatDate } from './utils';
-import { Section, CsProfileLink } from './components';
+import { Section, CsProfileLink, Tabs } from './components';
 import AboutMe from './AboutMe';
 import Friends from './Friends';
 import Images from './Images';
@@ -50,16 +49,7 @@ function Profile({profile, images, fileDate}) {
         </div>
 
         <Section>
-          <ul className="Profile-tabs">
-            { routes.map(({ route, label, count }) => (
-              <li key={route}>
-                <NavLink activeClassName="is-active" to={ route }>
-                  { label }
-                  { !! count && <span className="Profile-tab-count">{ count }</span> }
-                </NavLink>
-              </li>
-            )) }
-          </ul>
+          <Tabs routes={ routes } />
         </Section>
 
         <Switch>
@@ -67,7 +57,7 @@ function Profile({profile, images, fileDate}) {
             <AboutMe user={ user } interests={ interests } />
           </Route>
           <Route path="/references">
-            <References references={ references } />
+            <References references={ references } userId={user?.id} />
           </Route>
           <Route path="/friends">
             <Friends friends={ friends?.friends || [] } />
