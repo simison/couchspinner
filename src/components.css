@@ -24,3 +24,11 @@
   padding: 20px;
   word-break: break-word;
 }
+
+h3 .Anchor {
+  display: none;
+}
+
+h3:hover .Anchor {
+  display: inline;
+}

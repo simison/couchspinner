@@ -1,13 +1,14 @@
-import React, {useCallback, useState} from 'react'
+import React, {useCallback, useState, createRef} from 'react'
 import {useDropzone} from 'react-dropzone'
 import jszip from 'jszip';
 import classnames from 'classnames';
 
 import './App.css';
+import About from './About';
 import Intro from './Intro';
 import Profile from './Profile';
 // import example from './example-profile.json';
-const EXAMPLE_PROFILEE = false;
+const EXAMPLE_PROFILE = false;
 
 async function getJsonFromZip(zip) {
   const files = zip.filter((relativePath, zipEntry) => {
@@ -49,20 +50,24 @@ async function extractZip(file) {
 }
 
 function App() {
-  const [profile, setProfile] = useState(EXAMPLE_PROFILEE);
-  const [profileImages, setProfileImages] = useState({});
+  const [profile, setProfile] = useState(EXAMPLE_PROFILE);
+  const [profileImages, setProfileImages] = useState([]);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [fileDate, setFileDate] = useState(false);
+  const ref = createRef();
 
   const onDrop = useCallback(async acceptedFiles => {
-    console.log('acceptedFiles:',acceptedFiles);
+    setIsProcessing(true);
 
     if (acceptedFiles.length !== 1) {
+      setIsProcessing(false);
       return alert('Just one file please.');
     }
 
     const file = acceptedFiles[0];
 
     if (!['application/zip', 'application/json'].includes(file.type)) {
+      setIsProcessing(false);
       return alert('Please drop either the zip file or json file, e.g. "couchsurfing-export-123456-202005200751.zip", or "123456-202005200751.json"');
     }
 
@@ -81,15 +86,28 @@ function App() {
         alert('File is little too funky for us to understand... 😥');
       }
     }
+
+    setIsProcessing(false);
   }, []);
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
 
   return (
-    <div className={ classnames( 'App', { 'is-dropping': isDragActive } ) } {...getRootProps()}>
+    <div className={ classnames( 'App', { 'is-processing': isProcessing } ) }>
       { profile
         ? <Profile profile={ profile } images={ profileImages } fileDate={ fileDate } />
-        : <Intro isDragActive={ isDragActive } input={ <input {...getInputProps() } />} />
+        : (
+          <>
+            <div className={ classnames( 'drop-container', { 'is-dropping': isDragActive } ) } {...getRootProps()}>
+              <Intro
+                aboutRef={ ref }
+                input={ <input {...getInputProps() } />}
+                isDragActive={ isDragActive }
+              />
+            </div>
+            <About ref={ ref }/>
+          </>
+        )
       }
     </div>
   );

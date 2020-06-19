@@ -16,3 +16,11 @@ code {
 * {
   box-sizing: border-box;
 }
+
+.drop-container {
+  cursor: pointer;
+}
+
+.drop-container:focus {
+  outline: none;
+}

@@ -1,0 +1,10 @@
+.About-FAQ {
+  max-width: 780px;
+  margin: 0 auto 100px auto;
+  padding: 30px;
+  text-align: left;
+}
+
+.About-FAQ h3 {
+  margin-top: 2.5em;
+}

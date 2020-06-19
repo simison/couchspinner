@@ -23,3 +23,14 @@ export function CsProfileLink(props) {
     )
     : <span {...props}>{props.children}</span>
 }
+
+export function Anchor({id}) {
+  return (
+    <a
+      className="Anchor"
+      href={ `#${id}` }
+      id={ id }
+      title="Link here"
+    >#</a>
+  );
+}

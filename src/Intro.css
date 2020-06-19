@@ -1,23 +1,10 @@
-.Intro {
-  align-items: center;
-  background-color: #282c34;
-  border: 5px solid transparent;
-  color: #fff;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
-  justify-content: center;
-  min-height: 100vh;
-  text-align: center;
-}
-
-.Intro a {
-  color: #61dafb;
+a.Intro-by-link {
+  font-size: 0.5em;
+  color: #a9a9a9;
 }
 
 .Intro-logo {
-  height: 40vmin;
+  height: 30vmin;
   margin: 30px;
   pointer-events: none;
 }
@@ -25,6 +12,10 @@
 @media (prefers-reduced-motion: no-preference) {
   .Intro-logo {
     animation: Intro-logo-spin infinite 20s linear;
+  }
+  .is-processing .Intro-logo,
+  .is-dropping .Intro-logo {
+    animation: Intro-logo-spin infinite 2s linear;
   }
 }
 
@@ -40,4 +31,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Intro-instructions {
+  max-width: 600px;
 }
