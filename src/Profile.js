@@ -15,6 +15,7 @@ import Messages from './Messages';
 import Raw from './Raw';
 import References from './References';
 import TrustrootsTree from './trustroots-tree.svg';
+import { STORAGE_PREFIX } from './constants';
 
 function Profile({profile, images, fileDate}) {
   const { user_data: user, interests, references, friends, messages } = profile;
@@ -32,14 +33,28 @@ function Profile({profile, images, fileDate}) {
     { route: '/raw', label: 'Raw' }
   ];
 
+  const clearCache = () => {
+    window.sessionStorage.removeItem(`${STORAGE_PREFIX}_profile`);
+    window.sessionStorage.removeItem(`${STORAGE_PREFIX}_profile_images`);
+  };
+
   return (
     <Router>
       <div className="Profile">
         <div className="Profile-header">
-          <p><em>
-            <CsProfileLink id={user?.id}>Your Couchsurfing.com profile</CsProfileLink>
-            { fileDate && ` as of ${ formatDate(fileDate) }` }
-          </em></p>
+          <p>
+            <em>
+              <CsProfileLink id={user?.id}>Your Couchsurfing.com profile</CsProfileLink>
+              { fileDate && ` as of ${ formatDate(fileDate) }` }
+            </em>
+            <a
+              href="/"
+              className="Profile-clear"
+              onClick={ clearCache }
+            >
+              Clear profile
+            </a>
+          </p>
           <h1>
             { user?.profile?.first_name && `${user.profile.first_name} ` }
             { user?.profile?.last_name && `${user.profile.last_name} ` }

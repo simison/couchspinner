@@ -1,4 +1,4 @@
-import React, {useCallback, useState, createRef} from 'react';
+import React, {useCallback, useState, useEffect, createRef} from 'react';
 import {useDropzone} from 'react-dropzone';
 import jszip from 'jszip';
 import classnames from 'classnames';
@@ -7,6 +7,7 @@ import './App.css';
 import About from './About';
 import Intro from './Intro';
 import Profile from './Profile';
+import { STORAGE_PREFIX } from './constants';
 // import example from './example-profile.json';
 const EXAMPLE_PROFILE = false;
 
@@ -62,12 +63,23 @@ async function extractZip(file) {
 }
 
 function App() {
-  const [profile, setProfile] = useState(EXAMPLE_PROFILE);
-  const [profileImages, setProfileImages] = useState([]);
+  // Re-hydrade previous cache
+  const cachedProfile = JSON.parse(window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile`));
+  const cachedProfileImages = JSON.parse(window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile_images`));
+
+  const [profile, setProfile] = useState(cachedProfile || EXAMPLE_PROFILE);
+  const [profileImages, setProfileImages] = useState(cachedProfileImages || []);
   const [isProcessing, setIsProcessing] = useState(false);
   const [fileDate, setFileDate] = useState(false);
   const ref = createRef();
 
+  // Store for the browser session
+  useEffect(() => {
+    window.sessionStorage.setItem(`${STORAGE_PREFIX}_profile`, JSON.stringify(profile));
+    window.sessionStorage.setItem(`${STORAGE_PREFIX}_profile_images`, JSON.stringify(profileImages));
+  }, [profile, profileImages]);
+
+  // On uploading file(s)
   const onDrop = useCallback(async acceptedFiles => {
     setIsProcessing(true);
 

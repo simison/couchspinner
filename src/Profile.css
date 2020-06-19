@@ -66,3 +66,19 @@
 .promo .tr-logo {
   width: 50px;
 }
+
+.Profile-clear {
+  background: transparent;
+  border: 2px solid #ed6504;
+  color: #ed6504;
+  cursor: pointer;
+  float: right;
+  padding: 5px 10px;
+}
+
+.Profile-clear:active,
+.Profile-clear:hover,
+.Profile-clear:focus {
+  border-color: #ed2404;
+  color: #ed2404;
+}
