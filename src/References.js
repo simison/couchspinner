@@ -6,10 +6,9 @@ import {
 } from "react-router-dom";
 import marked from 'marked';
 
+import './References.scss';
 import { formatDate } from './utils';
 import { Section, Heading, Content, CsProfileLink, Tabs } from './components';
-
-import './References.css';
 
 /**
  * Count how many certain type references there are in array

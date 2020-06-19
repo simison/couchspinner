@@ -1,24 +1,31 @@
-.Intro h1 {
-  font-size: 2em;
-  font-weight: 300;
-  margin: 10px 40px;
-}
+@import '_colors.scss';
 
-.Intro h2 {
-  font-size: 1em;
-  font-weight: 300;
-  margin: 10px 40px;
+.Intro {
+  h1 {
+    font-size: 2em;
+    font-weight: 300;
+    margin: 10px 40px;
+  }
+  h2 {
+    font-size: 1em;
+    font-weight: 300;
+    margin: 10px 40px;
+  }
 }
 
 a.Intro-by-link {
   font-size: 0.5em;
-  color: #a9a9a9;
+  color: $grey-extra-light;
 }
 
 .Intro-logo {
   height: 30vmin;
   margin: 30px;
   pointer-events: none;
+}
+
+.Intro-instructions {
+  max-width: 600px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -32,8 +39,8 @@ a.Intro-by-link {
 }
 
 .is-dropping .Intro {
-  background-color: #363c48;
-  border-color: #f1cb85;
+  background-color: $grey-medium2;
+  border-color: $orange-light;
 }
 
 @keyframes Intro-logo-spin {
@@ -43,8 +50,4 @@ a.Intro-by-link {
   to {
     transform: rotate(360deg);
   }
-}
-
-.Intro-instructions {
-  max-width: 600px;
 }

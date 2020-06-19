@@ -1,0 +1,22 @@
+@import '_colors.scss';
+
+.AboutMe-interests {
+  margin: 10px 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    background-color: transparent;
+    border-radius: 4px;
+    border: 2px solid $grey-light2;
+    color: $grey-medium3;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 4px;
+    max-width: initial;
+    min-width: initial;
+    padding: 2px 10px;
+    width: auto;
+  }
+}

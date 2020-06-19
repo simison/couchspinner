@@ -3,7 +3,7 @@ import {useDropzone} from 'react-dropzone';
 import jszip from 'jszip';
 import classnames from 'classnames';
 
-import './App.css';
+import './App.scss';
 import About from './About';
 import Intro from './Intro';
 import Profile from './Profile';

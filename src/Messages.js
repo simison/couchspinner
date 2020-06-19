@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import marked from 'marked';
 
-import { Section, Heading, Content, CsProfileLink } from './components';
+import './Messages.scss';
 import { formatDate } from './utils';
-import './Messages.css';
+import { Section, Heading, Content, CsProfileLink } from './components';
 
 function Messages({messages, userId}) {
   const [openThread, setOpenThread] = useState(false);

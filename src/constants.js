@@ -1,1 +1,1 @@
-export const STORAGE_PREFIX = 'couchspinner_'
+export const STORAGE_PREFIX = 'couchspinner';

@@ -1,8 +1,8 @@
 import React from 'react'
 
-import sofa from './sofa.svg';
-import './Intro.css';
+import './Intro.scss';
 import { scrollToRef } from './utils';
+import sofa from './sofa.svg';
 
 const stopUploadsFromTriggering = event => { event.stopPropagation(); };
 

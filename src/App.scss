@@ -1,8 +1,10 @@
+@import '_colors.scss';
+
 .App-landing-section {
   align-items: center;
-  background-color: #282c34;
+  background-color: $grey-dark;
   border: 5px solid transparent;
-  color: #fff;
+  color: $white;
   display: flex;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
@@ -12,12 +14,12 @@
 }
 
 .App-landing-section a {
-  color: #61dafb;
+  color: $blue;
   text-decoration: none;
-}
 
-.App-landing-section a:hover,
-.App-landing-section a:active,
-.App-landing-section a:focus {
-  color: #fff;
+  &:hover,
+  &:active,
+  &:focus {
+    color: $white;
+  }
 }

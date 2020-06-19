@@ -1,6 +1,8 @@
+@import '_colors.scss';
+
 .Profile-reference {
   padding: 30px 0;
-  border-top: 1px solid #e6e6e6;
+  border-top: 1px solid $grey-light;
 }
 
 .Profile-reference-meta {
@@ -13,25 +15,25 @@
 }
 
 .Profile-reference-experience-positive {
-  color: #41b866;
+  color: $experience-positive;
 }
 
 .Profile-reference-experience-neutral {
-  color: #ED6504;
+  color: $experience-neutral;
 }
 
 .Profile-reference-experience-negative {
-  color: #c63d43;
+  color: $experience-negative;
 }
 
 .Profile-reference-date {
-  color: #929EAE;
+  color: $grey-light3;
   font-size: 0.9em;
 }
 
 .Profile-reference-response {
   margin-left: 30px;
-  border: 1px solid rgba(0,0,0,0.15);
+  border: 1px solid $grey-medium;
   margin-top: 1em;
   padding: 10px;
 }

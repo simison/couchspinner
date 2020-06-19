@@ -5,7 +5,7 @@ import {
   Route
 } from "react-router-dom";
 
-import './Profile.css';
+import './Profile.scss';
 import { formatDate } from './utils';
 import { Section, CsProfileLink, Tabs } from './components';
 import AboutMe from './AboutMe';

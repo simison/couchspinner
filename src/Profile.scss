@@ -1,0 +1,66 @@
+@import '_colors.scss';
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+.Profile {
+  background: $grey-light4;
+  border: 5px solid transparent;
+  color: $grey-medium4;
+  font-family: Lato, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-feature-settings: 'kern', 'liga', 'pnum';
+  line-height: 1.5;
+  min-height: 100vh;
+  padding: 50px;
+}
+
+.Profile-header {
+  margin: 10px auto;
+  max-width: 980px;
+}
+
+.Profile a {
+  color: $blue;
+  text-decoration: none;
+
+  &:active,
+  &:focus,
+  &:hover {
+    color: $orange;
+    text-decoration: none;
+  }
+}
+
+
+.is-dropping .Profile {
+  background-color: $grey-light5;
+  border-color: $orange;
+}
+
+.is-dropping .Profile * {
+  opacity: 0.8;
+}
+
+.promo {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 300;
+  margin-top: 40px;
+}
+
+.promo .tr-logo {
+  width: 50px;
+}
+
+a.Profile-clear {
+  background: transparent;
+  border: 2px solid $grey-medium;
+  cursor: pointer;
+  float: right;
+  padding: 5px 10px;
+
+  &:active,
+  &:hover,
+  &:focus {
+    border-color: $orange;
+    color: $orange;
+  }
+}

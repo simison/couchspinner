@@ -1,8 +1,7 @@
 import React from 'react'
+import JsonTree from 'react-json-tree';
 
 import { Section, Heading } from './components';
-import JsonTree from 'react-json-tree';
-import './Raw.css';
 
 function Raw({json}) {
   return (

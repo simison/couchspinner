@@ -2,7 +2,7 @@ import marked from 'marked';
 import React from 'react'
 
 import { Section, Heading, Content } from './components';
-import './AboutMe.css';
+import './AboutMe.scss';
 
 function AboutMe({user, interests}) {
   return (

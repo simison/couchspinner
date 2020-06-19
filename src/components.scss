@@ -1,0 +1,90 @@
+@import '_colors.scss';
+
+.Section {
+  background-color: $white;
+  border-bottom: 2px solid rgba(0,0,0,0.15);
+  border-radius: 2px;
+  margin: 10px auto;
+  max-width: 980px;
+
+  p {
+    margin: 0 0 1em 0;
+  }
+}
+
+.Section-heading {
+  padding: 20px;
+  border-bottom: 1px solid $grey-light;
+  font-size: 1em;
+  text-transform: uppercase;
+  word-break: break-word;
+  font-weight: bold;
+}
+
+.Section-content {
+  overflow-wrap: break-word;
+  padding: 20px;
+  word-break: break-word;
+}
+
+h3 .Anchor {
+  display: none;
+}
+
+h3:hover .Anchor {
+  display: inline;
+}
+
+.Tab-count {
+  border-radius: 3.75em;
+  color: $white;
+  background: $blue;
+  display: inline-block;
+  font-size: 0.8em;
+  font-weight: bold;
+  line-height: 1;
+  margin-left: 10px;
+  padding: 4px 7px;
+  vertical-align: 1px;
+}
+
+.Tabs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding: 10px 20px;
+
+  li {
+    display: inline-block;
+    margin: 10px 30px 10px 0;
+    vertical-align: middle;
+
+    a {
+      background: none;
+      border: 0;
+      border-bottom: 2px solid transparent;
+      color: $blue;
+      cursor: pointer;
+      font-size: 1em;
+      margin: 0;
+      outline: none;
+      padding: 5px 0;
+
+      &.is-active,
+      &:hover,
+      &:focus {
+        color: $orange;
+
+        .Tab-count,
+        .Tab-count,
+        .Tab-count {
+          background: $orange;
+        }
+      }
+
+      &.is-active {
+        border-color: $grey-medium;
+      }
+    }
+  }
+}

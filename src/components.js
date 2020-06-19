@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from "react-router-dom";
 
-import './components.css';
+import './components.scss';
 
 export function Section({children}) {
   return <div className="Section">{children}</div>
@@ -45,7 +45,7 @@ export function Tabs({routes}) {
         <li key={route}>
           <NavLink activeClassName="is-active" to={ route }>
             { label }
-            { !! count && <span className="Profile-tab-count">{ count }</span> }
+            { !! count && <span className="Tab-count">{ count }</span> }
           </NavLink>
         </li>
       )) }
