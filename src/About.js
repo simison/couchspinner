@@ -12,7 +12,7 @@ const About = forwardRef(({isDragActive, input, aboutRef}, ref) => {
         <h3>Why CouchSpinner exists? <Anchor id="why-couchspinner-exists" /></h3>
         <p>CouchSurfing locked out significant portion of their community by <a href="https://blog.couchsurfing.com/couchsurfing-needs-your-help/">turning into a paid site overnight</a> on May 14, 2020.</p>
         <p>You can recover your data from CouchSurfing, but what can you do with it then?</p>
-        <p>With CouchSpinner, you can preview your profile, references and messages again. {/*You could also use CouchSpinner to turn your CouchSurfing profile into a Trustroots profile!*/}</p>
+        <p>With CouchSpinner, you can preview your profile, references and messages again!</p>
 
         <h3>How can I export my CouchSurfing profile? <Anchor id="how-can-i-export-my-couchsurfing-profile" /></h3>
         <p>If you can still access your profile, <a href="https://support.couchsurfing.org/hc/en-us/articles/360045738353-Download-your-data">follow these instructions to download your data</a>.</p>
@@ -36,7 +36,6 @@ const About = forwardRef(({isDragActive, input, aboutRef}, ref) => {
         <p>Could be! Please check "raw" tab of your profile to browser what the file actually contains and what we are showing.</p>
         <p>The preview doesn't show everything, but also the file from CouchSurfing could be only partial. They've elaborated that <a href="https://www.facebook.com/groups/253525915764545/?post_id=274543140329489&comment_id=274552816995188&reply_comment_id=274560876994382">some of the very old data might've been lost</a>. You should reach out to CouchSurfing for any specifics though.</p>
       </div>
-
     </div>
   );
 });
