@@ -80,7 +80,7 @@ function App() {
 
     if (!['application/zip', 'application/json'].includes(file.type)) {
       setIsProcessing(false);
-      return alert('Please drop either the zip file or json file, e.g. "couchsurfing-export-123456-202005200751.zip", or "123456-202005200751.json"');
+      return alert('Please drop either the zip file or json file.\n\nE.g. "couchsurfing-export-123456-202005200751.zip", or "123456-202005200751.json"');
     }
 
     setFileDate(file.lastModifiedDate);
@@ -111,11 +111,8 @@ function App() {
         : (
           <>
             <div className={ classnames( 'drop-container', { 'is-dropping': isDragActive } ) } {...getRootProps()}>
-              <Intro
-                aboutRef={ ref }
-                input={ <input {...getInputProps() } />}
-                isDragActive={ isDragActive }
-              />
+              <input {...getInputProps() } />
+              <Intro aboutRef={ ref }/>
             </div>
             <About ref={ ref }/>
           </>
