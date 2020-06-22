@@ -53,7 +53,7 @@ function Profile({profile, images, fileDate}) {
               className="Profile-clear"
               onClick={ clearCache }
             >
-              Preview another profile
+              Clear out the profile
             </a>
           </p>
           <h1>
