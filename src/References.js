@@ -38,48 +38,58 @@ function referenceTypeLabel(type, isFromMe) {
 
 function ReferencesList({list, userId}) {
   return list.map((reference) => {
-    const isFromMe = reference.creator_id === userId;
-    const profileId = isFromMe ? reference.creator_id : reference.recipient_id;
+    const {
+      body,
+      created_at,
+      creator_id,
+      experience,
+      recipient_id,
+      reference_type,
+      response_body,
+      response_created_at,
+    } = reference;
+    const isFromMe = creator_id === userId;
+    const profileId = isFromMe ? recipient_id : creator_id;
 
     return (
       <div
         className="Profile-reference"
-        key={ `${reference.creator_id}-${reference.recipient_id}-${reference.created_at}` }
+        key={ `${creator_id}-${recipient_id}-${created_at}` }
       >
         <p className="Profile-reference-meta">
-          { reference.reference_type && (
+          { reference_type && (
             <CsProfileLink className="Profile-reference-type" id={profileId}>
-              { referenceTypeLabel(reference.reference_type, isFromMe) }
+              { referenceTypeLabel(reference_type, isFromMe) }
             </CsProfileLink>
           ) }
-          { reference.experience && (
-            <strong className={`Profile-reference-experience Profile-reference-experience-${reference.experience || 'unknown'}`}>
-              ★ {(reference.experience || 'unknown')}
+          { experience && (
+            <strong className={`Profile-reference-experience Profile-reference-experience-${experience}`}>
+              ★ {(experience)}
             </strong>
           ) }
-          { reference.created_at && (
+          { created_at && (
             <span className="Profile-reference-date">
-              { formatDate(reference.created_at) }
+              { formatDate(created_at) }
             </span>
           ) }
         </p>
-        { reference.body && (
+        { body && (
           <p>
-            <span dangerouslySetInnerHTML={{ __html: marked(reference.body) }} />
+            <span dangerouslySetInnerHTML={{ __html: marked(body) }} />
           </p>
         ) }
-        { reference.response_body && (
+        { response_body && (
           <div className="Profile-reference-response">
             <p>
               <strong>Response</strong>
-              { reference.response_created_at && (
+              { response_created_at && (
                 <span className="Profile-reference-date">
-                  { ` ${formatDate(reference.response_created_at)}` }
+                  { ` ${formatDate(response_created_at)}` }
                 </span>
               ) }
             </p>
             <p>
-              <span dangerouslySetInnerHTML={{ __html: marked(reference.response_body) }} />
+              <span dangerouslySetInnerHTML={{ __html: marked(response_body) }} />
             </p>
           </div>
         ) }
