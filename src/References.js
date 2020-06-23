@@ -51,6 +51,22 @@ function experienceLabel(experience) {
   }
 }
 
+function sortReferences(referernces) {
+  return referernces.sort(function(a, b) {
+    var dateA = a.created_at;
+    var dateB = b.created_at;
+    if (dateA < dateB) {
+      return -1;
+    }
+    if (dateA > dateB) {
+      return 1;
+    }
+
+    // must be equal
+    return 0;
+  });
+}
+
 function ReferencesList({list, userId, names}) {
   return list.map((reference) => {
     const {
@@ -129,32 +145,35 @@ function ReferencesList({list, userId, names}) {
 }
 
 function References({references, userId, names}) {
+  const writtenReferences = sortReferences(references?.written_references ?? []);
+  const receivedReferences = sortReferences(references?.received_references ?? []);
+
   return (
     <Router>
       <Section>
         <Heading>References</Heading>
         <Content>
           <p>
-            { references?.written_references?.length
+            { writtenReferences.length
               ? (
                 <>
-                  <strong>{ `${references.written_references.length} written: ` }</strong>
-                  { `${countReferences(references.written_references, 'positive')} positive, ` }
-                  { `${countReferences(references.written_references, 'neutral')} neutral, and ` }
-                  { `${countReferences(references.written_references, 'negative')} negative.` }
+                  <strong>{ `${writtenReferences.length} written: ` }</strong>
+                  { `${countReferences(writtenReferences, 'positive')} positive, ` }
+                  { `${countReferences(writtenReferences, 'neutral')} neutral, and ` }
+                  { `${countReferences(writtenReferences, 'negative')} negative.` }
                 </>
               )
               : `You didn't write references`
             }
           </p>
           <p>
-            { references?.received_references?.length
+            { receivedReferences.length
               ? (
                 <>
-                  <strong>{ `${references.received_references.length} received: ` }</strong>
-                  { `${countReferences(references.received_references, 'positive')} positive, ` }
-                  { `${countReferences(references.received_references, 'neutral')} neutral, and ` }
-                  { `${countReferences(references.received_references, 'negative')} negative.` }
+                  <strong>{ `${receivedReferences.length} received: ` }</strong>
+                  { `${countReferences(receivedReferences, 'positive')} positive, ` }
+                  { `${countReferences(receivedReferences, 'neutral')} neutral, and ` }
+                  { `${countReferences(receivedReferences, 'negative')} negative.` }
                 </>
               )
               : `You didn't receive references`
@@ -170,7 +189,7 @@ function References({references, userId, names}) {
             <Route exact path="/references">
               <h3>Received references</h3>
               <ReferencesList
-                list={references?.received_references ?? []}
+                list={receivedReferences}
                 names={names}
                 userId={userId}
               />
@@ -178,7 +197,7 @@ function References({references, userId, names}) {
             <Route path="/references/written">
               <h3>Written references</h3>
               <ReferencesList
-                list={references?.written_references ?? []}
+                list={writtenReferences}
                 names={names}
                 userId={userId}
               />
