@@ -7,6 +7,7 @@ import './App.scss';
 import About from './About';
 import Intro from './Intro';
 import Profile from './Profile';
+import { testStorage } from './utils';
 import { STORAGE_PREFIX } from './constants';
 // import example from './example-profile.json';
 const EXAMPLE_PROFILE = false;
@@ -62,11 +63,21 @@ async function extractZip(file) {
   };
 }
 
+function setCacheValue(key, value) {
+  try {
+    window.sessionStorage.setItem(`${STORAGE_PREFIX}_${key}`, value);
+  } catch(error) {
+    console.error(error);
+  }
+}
+
 function App() {
+  const isStorageAvailable = testStorage('sessionStorage');
+
   // Re-hydrade previous cache
-  const cachedFileDate = window.sessionStorage.getItem(`${STORAGE_PREFIX}_file_date`);
-  const cachedProfile = JSON.parse(window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile`));
-  const cachedProfileImages = JSON.parse(window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile_images`));
+  const cachedFileDate = isStorageAvailable && window.sessionStorage.getItem(`${STORAGE_PREFIX}_file_date`);
+  const cachedProfile = isStorageAvailable && JSON.parse(window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile`));
+  const cachedProfileImages = isStorageAvailable && JSON.parse(window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile_images`));
 
   const [profile, setProfile] = useState(cachedProfile || EXAMPLE_PROFILE);
   const [profileImages, setProfileImages] = useState(cachedProfileImages || []);
@@ -76,10 +87,12 @@ function App() {
 
   // Store for the browser session
   useEffect(() => {
-    window.sessionStorage.setItem(`${STORAGE_PREFIX}_file_date`, fileDate);
-    window.sessionStorage.setItem(`${STORAGE_PREFIX}_profile_images`, JSON.stringify(profileImages));
-    window.sessionStorage.setItem(`${STORAGE_PREFIX}_profile`, JSON.stringify(profile));
-  }, [profile, profileImages, fileDate]);
+    if(isStorageAvailable) {
+      setCacheValue('file_date', fileDate);
+      setCacheValue('profile_images', JSON.stringify(profileImages));
+      setCacheValue('profile', JSON.stringify(profile));
+    }
+  }, [isStorageAvailable, profile, profileImages, fileDate]);
 
   // On uploading file(s)
   const onDrop = useCallback(async acceptedFiles => {

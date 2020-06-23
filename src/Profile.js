@@ -15,7 +15,6 @@ import Messages from './Messages';
 import Raw from './Raw';
 import References from './References';
 import TrustrootsTree from './trustroots-tree.svg';
-import { STORAGE_PREFIX } from './constants';
 
 function Profile({profile, images, fileDate}) {
   const { user_data: user, interests, references, friends, messages } = profile;
@@ -33,12 +32,6 @@ function Profile({profile, images, fileDate}) {
     { route: '/raw', label: 'Raw' }
   ];
 
-  const clearCache = () => {
-    window.sessionStorage.removeItem(`${STORAGE_PREFIX}_file_date`);
-    window.sessionStorage.removeItem(`${STORAGE_PREFIX}_profile_images`);
-    window.sessionStorage.removeItem(`${STORAGE_PREFIX}_profile`);
-  };
-
   return (
     <Router>
       <div className="Profile">
@@ -51,7 +44,7 @@ function Profile({profile, images, fileDate}) {
             <a
               href="/"
               className="Profile-clear"
-              onClick={ clearCache }
+              onClick={ () => window.sessionStorage.clear() }
             >
               Clear out the profile
             </a>
