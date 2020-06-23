@@ -24,10 +24,13 @@ const About = forwardRef(({isDragActive, input, aboutRef}, ref) => {
         <h3>Who made this? <Anchor id="who-made-this" /></h3>
         <p>Folks behind <a href="https://www.trustroots.org/?ref=couchspinner">Trustroots.org</a>, a free and community ran hospitality exchange site alternative to CouchSurfing.</p>
         <p>We built the functionality anyway for Trustroots and wanted to give it away for everyone.</p>
-        <p>We'd love it if you would also joining Trustroots, of course! <span role="img" aria-hidden>🙂</span></p>
+        <p>We'd love it if you would also join Trustroots, of course! <span role="img" aria-hidden>🙂</span></p>
 
         <h3>What are other alternatives to CouchSurfing? <Anchor id="couchsurfing-alternatives" /></h3>
         <p>You could check <a href="https://www.trustroots.org/?ref=couchspinner">Trustroots</a>, <a href="https://www.bewelcome.org/">BeWelcome</a>, <a href="https://www.warmshowers.org/">Warmshowers</a> and <a href="https://hackercouch.com/">Hackercouch</a>.</p>
+
+        <h3>I see only some names, but not everyone?</h3>
+        <p>Most of the Couchsurfing export doesn't contain names of other profiles, only user IDs. There are a few names available from "couch requests", which then we can show elsewhere too.</p>
 
         <h3>Not all my data is here! <Anchor id="not-all-my-data-is-here" /></h3>
         <p>Could be! Please check the "raw" tab of your profile to browser what the file actually contains and what we are showing.</p>
