@@ -36,6 +36,21 @@ function referenceTypeLabel(type, isFromMe) {
   }
 }
 
+function experienceLabel(experience) {
+  switch (experience) {
+    case 'positive':
+      return 'Positive'
+    case 'negative':
+      return 'Negative';
+    case 'neutral':
+      return 'Neutral';
+    case 'did_not_meet':
+      return 'Did not meet';
+    default:
+      return experience;
+  }
+}
+
 function ReferencesList({list, userId}) {
   return list.map((reference) => {
     const {
@@ -64,7 +79,8 @@ function ReferencesList({list, userId}) {
           ) }
           { experience && (
             <strong className={`Profile-reference-experience Profile-reference-experience-${experience}`}>
-              ★ {(experience)}
+              { experience === 'positive' && '★ ' }
+              { experienceLabel(experience) }
             </strong>
           ) }
           { created_at && (
