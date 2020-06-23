@@ -7,7 +7,16 @@
 
 .Profile-reference-meta {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  .Profile-reference-type {
+    margin-right: 5px;
+  }
+  .Profile-reference-experience {
+    margin-left: 20px;
+  }
+  .Profile-reference-date {
+    margin-left: auto;
+  }
 }
 
 .Profile-reference-experience {

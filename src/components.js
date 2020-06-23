@@ -16,7 +16,7 @@ export function Content(props) {
 }
 
 export function CsProfileLink(props) {
-  const label = props.children ? props.children : 'Member';
+  const label = props.children || 'Member';
   return !! props.id
     ? (
       <a {...props} href={`https://www.couchsurfing.com/users/${props.id}`}>
@@ -24,6 +24,20 @@ export function CsProfileLink(props) {
       </a>
     )
     : <span {...props}>{label}</span>
+}
+
+export function CsProfileName(props) {
+  const { id, names, alt, append } = props;
+  const displayName = names ? names.get(id)?.displayName : false;
+
+  return (
+    <>
+      <CsProfileLink id={id} {...props}>
+        { displayName || alt }
+      </CsProfileLink>
+      { displayName && append }
+    </>
+  );
 }
 
 export function Anchor({id}) {

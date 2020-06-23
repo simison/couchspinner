@@ -8,7 +8,7 @@ import marked from 'marked';
 
 import './References.scss';
 import { formatDate } from './utils';
-import { Section, Heading, Content, CsProfileLink, Tabs } from './components';
+import { Section, Heading, Content, CsProfileName, Tabs } from './components';
 
 /**
  * Count how many certain type references there are in array
@@ -51,7 +51,7 @@ function experienceLabel(experience) {
   }
 }
 
-function ReferencesList({list, userId}) {
+function ReferencesList({list, userId, names}) {
   return list.map((reference) => {
     const {
       body,
@@ -72,11 +72,25 @@ function ReferencesList({list, userId}) {
         key={ `${creator_id}-${recipient_id}-${created_at}` }
       >
         <p className="Profile-reference-meta">
-          { reference_type && (
-            <CsProfileLink className="Profile-reference-type" id={profileId}>
-              { referenceTypeLabel(reference_type, isFromMe) }
-            </CsProfileLink>
-          ) }
+          { isFromMe
+            ? referenceTypeLabel(reference_type, isFromMe)
+            : (
+              <>
+                <CsProfileName
+                  className="Profile-reference-type"
+                  names={ names }
+                  id={profileId}
+                  alt={ referenceTypeLabel(reference_type) }
+                  append={ (
+                    <>
+                      { reference_type === 'host' && '(host)' }
+                      { reference_type === 'surf' && '(surfer)' }
+                    </>
+                  ) }
+                />
+              </>
+            )
+          }
           { experience && (
             <strong className={`Profile-reference-experience Profile-reference-experience-${experience}`}>
               { experience === 'positive' && '★ ' }
@@ -114,7 +128,7 @@ function ReferencesList({list, userId}) {
   });
 }
 
-function References({references, userId}) {
+function References({references, userId, names}) {
   return (
     <Router>
       <Section>
@@ -155,11 +169,19 @@ function References({references, userId}) {
           <Switch>
             <Route exact path="/references">
               <h3>Received references</h3>
-              <ReferencesList userId={userId} list={references?.received_references ?? []} />
+              <ReferencesList
+                list={references?.received_references ?? []}
+                names={names}
+                userId={userId}
+              />
             </Route>
             <Route path="/references/written">
               <h3>Written references</h3>
-              <ReferencesList userId={userId} list={references?.written_references ?? []} />
+              <ReferencesList
+                list={references?.written_references ?? []}
+                names={names}
+                userId={userId}
+              />
             </Route>
           </Switch>
         </Content>

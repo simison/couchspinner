@@ -16,7 +16,7 @@ import Raw from './Raw';
 import References from './References';
 import TrustrootsTree from './trustroots-tree.svg';
 
-function Profile({profile, images, fileDate}) {
+function Profile({fileDate, images, names, profile }) {
   const { user_data: user, interests, references, friends, messages } = profile;
 
   const referencesCount = (references?.written_references?.length ?? 0) + (references?.received_references?.length ?? 0);
@@ -66,10 +66,10 @@ function Profile({profile, images, fileDate}) {
             <AboutMe user={ user } interests={ interests } />
           </Route>
           <Route path="/references">
-            <References references={ references } userId={ user?.id } />
+            <References names={ names } references={ references } userId={ user?.id } />
           </Route>
           <Route path="/friends">
-            <Friends friends={ friends?.friends || [] } />
+            <Friends names={ names } friends={ friends?.friends || [] } />
           </Route>
           <Route path="/messages">
             <Messages messages={ messages?.messages || [] } userId={ user?.id } />

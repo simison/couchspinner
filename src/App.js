@@ -58,9 +58,31 @@ async function extractZip(file) {
   const images = await getImagesFromZip(zip);
 
   return {
-    json,
     images,
+    json,
   };
+}
+
+function getNamesFromJson(json) {
+  const names = new Map();
+
+  const collectName = visit => {
+    const person = visit?.surfer || visit?.host || {};
+    const username = person?.username;
+    const id = person?.profile?.id;
+    const displayName = person?.profile?.display_name;
+    names.set(id, { displayName, username });
+  };
+
+  if (json?.couch_visits?.host_couch_visits) {
+    json.couch_visits.host_couch_visits.forEach(collectName);
+  }
+
+  if (json?.couch_visits?.surfer_couch_visits) {
+    json.couch_visits.surfer_couch_visits.forEach(collectName);
+  }
+
+  return names;
 }
 
 function setCacheValue(key, value) {
@@ -78,14 +100,16 @@ function App() {
   const cachedFileDate = isStorageAvailable && window.sessionStorage.getItem(`${STORAGE_PREFIX}_file_date`);
   const cachedProfile = isStorageAvailable && JSON.parse(window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile`));
   const cachedProfileImages = isStorageAvailable && JSON.parse(window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile_images`));
+  const cachedNames = cachedProfile ? getNamesFromJson(cachedProfile) : new Map();
 
   const [profile, setProfile] = useState(cachedProfile || EXAMPLE_PROFILE);
   const [profileImages, setProfileImages] = useState(cachedProfileImages || []);
+  const [names, setNames] = useState(cachedNames);
   const [fileDate, setFileDate] = useState(cachedFileDate || false);
   const [isProcessing, setIsProcessing] = useState(false);
   const ref = createRef();
 
-  // Store for the browser session
+  // Store for the browser session — gets cleaared out when closing tab but not on page refresh
   useEffect(() => {
     if(isStorageAvailable) {
       setCacheValue('file_date', fileDate);
@@ -114,13 +138,17 @@ function App() {
 
     if (file.type === 'application/zip') {
       const { json, images } = await extractZip(file);
+      const names = getNamesFromJson(json);
       setProfile(json);
+      setNames(names);
       setProfileImages(images);
     } else if (file.type === 'application/json') {
       const jsonProfile = await file.text();
       try {
-        const json = JSON.parse(jsonProfile)
+        const json = JSON.parse(jsonProfile);
+        const names = getNamesFromJson(json);
         setProfile(json);
+        setNames(names);
       } catch {
         alert('File is little too funky for us to understand... 😥');
       }
@@ -134,7 +162,12 @@ function App() {
   return (
     <div className={ classnames( 'App', { 'is-processing': isProcessing } ) }>
       { profile
-        ? <Profile profile={ profile } images={ profileImages } fileDate={ fileDate } />
+        ? <Profile
+            fileDate={ fileDate }
+            images={ profileImages }
+            names={ names }
+            profile={ profile }
+          />
         : (
           <>
             <div className={ classnames( 'drop-container', { 'is-dropping': isDragActive } ) } {...getRootProps()}>

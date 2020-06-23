@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Section, Heading, Content, CsProfileLink } from './components';
+import { Section, Heading, Content, CsProfileName } from './components';
 
-function AboutMe({friends}) {
+function AboutMe({friends, names}) {
   return (
     <Section>
       <Heading>Friends</Heading>
@@ -13,7 +13,7 @@ function AboutMe({friends}) {
             const id = parseInt(friend.profile.replace('https://www.couchsurfing.com/users/', ''), 10);
             return (
               <li key={id}>
-                <CsProfileLink id={id}>{friend.profile}</CsProfileLink>
+                <CsProfileName names={ names } id={id} alt={ friend.profile.replace('https://www.', '') } />
               </li>
             );
           }) }
