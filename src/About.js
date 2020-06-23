@@ -23,8 +23,8 @@ const About = forwardRef(({isDragActive, input, aboutRef}, ref) => {
 
         <h3>Who made this? <Anchor id="who-made-this" /></h3>
         <p>Folks behind <a href="https://www.trustroots.org/?ref=couchspinner">Trustroots.org</a>, a free and community ran hospitality exchange site alternative to CouchSurfing.</p>
-        <p>We built the functionality anyway for Trustroots and wanted to give it away for people who don't want to join Trustroots.</p>
-        <p>We'd love it if you considered joining Trustroots, though! <span role="img" aria-hidden>🙂</span></p>
+        <p>We built the functionality anyway for Trustroots and wanted to give it away for everyone.</p>
+        <p>We'd love it if you would also joining Trustroots, of course! <span role="img" aria-hidden>🙂</span></p>
 
         <h3>What are other alternatives to CouchSurfing? <Anchor id="couchsurfing-alternatives" /></h3>
         <p>You could check <a href="https://www.trustroots.org/?ref=couchspinner">Trustroots</a>, <a href="https://www.bewelcome.org/">BeWelcome</a>, <a href="https://www.warmshowers.org/">Warmshowers</a> and <a href="https://hackercouch.com/">Hackercouch</a>.</p>
