@@ -1,9 +1,5 @@
-import React from 'react'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import marked from 'marked';
 
 import './References.scss';
@@ -22,7 +18,8 @@ function countReferences(references, experience) {
     return 0;
   }
 
-  return references.filter((reference) => reference.experience === experience).length;
+  return references.filter(reference => reference.experience === experience)
+    .length;
 }
 
 function referenceTypeLabel(type, isFromMe) {
@@ -39,7 +36,7 @@ function referenceTypeLabel(type, isFromMe) {
 function experienceLabel(experience) {
   switch (experience) {
     case 'positive':
-      return 'Positive'
+      return 'Positive';
     case 'negative':
       return 'Negative';
     case 'neutral':
@@ -52,7 +49,7 @@ function experienceLabel(experience) {
 }
 
 function sortReferences(referernces) {
-  return referernces.sort(function(a, b) {
+  return referernces.sort(function (a, b) {
     var dateA = a.created_at;
     var dateB = b.created_at;
     if (dateA < dateB) {
@@ -67,8 +64,8 @@ function sortReferences(referernces) {
   });
 }
 
-function ReferencesList({list, userId, names}) {
-  return list.map((reference) => {
+function ReferencesList({ list, userId, names }) {
+  return list.map(reference => {
     const {
       body,
       created_at,
@@ -85,68 +82,75 @@ function ReferencesList({list, userId, names}) {
     return (
       <div
         className="Profile-reference"
-        key={ `${creator_id}-${recipient_id}-${created_at}` }
+        key={`${creator_id}-${recipient_id}-${created_at}`}
       >
         <p className="Profile-reference-meta">
-          { isFromMe
-            ? referenceTypeLabel(reference_type, isFromMe)
-            : (
-              <>
-                <CsProfileName
-                  className="Profile-reference-type"
-                  names={ names }
-                  id={profileId}
-                  alt={ referenceTypeLabel(reference_type) }
-                  append={ (
-                    <>
-                      { reference_type === 'host' && '(host)' }
-                      { reference_type === 'surf' && '(surfer)' }
-                    </>
-                  ) }
-                />
-              </>
-            )
-          }
-          { experience && (
-            <strong className={`Profile-reference-experience Profile-reference-experience-${experience}`}>
-              { experience === 'positive' && '★ ' }
-              { experienceLabel(experience) }
+          {isFromMe ? (
+            referenceTypeLabel(reference_type, isFromMe)
+          ) : (
+            <>
+              <CsProfileName
+                className="Profile-reference-type"
+                names={names}
+                id={profileId}
+                alt={referenceTypeLabel(reference_type)}
+                append={
+                  <>
+                    {reference_type === 'host' && '(host)'}
+                    {reference_type === 'surf' && '(surfer)'}
+                  </>
+                }
+              />
+            </>
+          )}
+          {experience && (
+            <strong
+              className={`Profile-reference-experience Profile-reference-experience-${experience}`}
+            >
+              {experience === 'positive' && '★ '}
+              {experienceLabel(experience)}
             </strong>
-          ) }
-          { created_at && (
+          )}
+          {created_at && (
             <span className="Profile-reference-date">
-              { formatDate(created_at) }
+              {formatDate(created_at)}
             </span>
-          ) }
+          )}
         </p>
-        { body && (
+        {body && (
           <p>
             <span dangerouslySetInnerHTML={{ __html: marked(body) }} />
           </p>
-        ) }
-        { response_body && (
+        )}
+        {response_body && (
           <div className="Profile-reference-response">
             <p>
               <strong>Response</strong>
-              { response_created_at && (
+              {response_created_at && (
                 <span className="Profile-reference-date">
-                  { ` ${formatDate(response_created_at)}` }
+                  {` ${formatDate(response_created_at)}`}
                 </span>
-              ) }
+              )}
             </p>
             <p>
-              <span dangerouslySetInnerHTML={{ __html: marked(response_body) }} />
+              <span
+                dangerouslySetInnerHTML={{ __html: marked(response_body) }}
+              />
             </p>
           </div>
-        ) }
+        )}
       </div>
     );
   });
 }
 
-function References({references, userId, names}) {
-  const writtenReferences = sortReferences(references?.written_references ?? []);
-  const receivedReferences = sortReferences(references?.received_references ?? []);
+function References({ references, userId, names }) {
+  const writtenReferences = sortReferences(
+    references?.written_references ?? [],
+  );
+  const receivedReferences = sortReferences(
+    references?.received_references ?? [],
+  );
 
   return (
     <Router>
@@ -154,36 +158,45 @@ function References({references, userId, names}) {
         <Heading>References</Heading>
         <Content>
           <p>
-            { writtenReferences.length
-              ? (
-                <>
-                  <strong>{ `${writtenReferences.length} written: ` }</strong>
-                  { `${countReferences(writtenReferences, 'positive')} positive, ` }
-                  { `${countReferences(writtenReferences, 'neutral')} neutral, and ` }
-                  { `${countReferences(writtenReferences, 'negative')} negative.` }
-                </>
-              )
-              : `You didn't write references`
-            }
+            {writtenReferences.length ? (
+              <>
+                <strong>{`${writtenReferences.length} written: `}</strong>
+                {`${countReferences(writtenReferences, 'positive')} positive, `}
+                {`${countReferences(
+                  writtenReferences,
+                  'neutral',
+                )} neutral, and `}
+                {`${countReferences(writtenReferences, 'negative')} negative.`}
+              </>
+            ) : (
+              `You didn't write references`
+            )}
           </p>
           <p>
-            { receivedReferences.length
-              ? (
-                <>
-                  <strong>{ `${receivedReferences.length} received: ` }</strong>
-                  { `${countReferences(receivedReferences, 'positive')} positive, ` }
-                  { `${countReferences(receivedReferences, 'neutral')} neutral, and ` }
-                  { `${countReferences(receivedReferences, 'negative')} negative.` }
-                </>
-              )
-              : `You didn't receive references`
-            }
+            {receivedReferences.length ? (
+              <>
+                <strong>{`${receivedReferences.length} received: `}</strong>
+                {`${countReferences(
+                  receivedReferences,
+                  'positive',
+                )} positive, `}
+                {`${countReferences(
+                  receivedReferences,
+                  'neutral',
+                )} neutral, and `}
+                {`${countReferences(receivedReferences, 'negative')} negative.`}
+              </>
+            ) : (
+              `You didn't receive references`
+            )}
           </p>
 
-          <Tabs routes={ [
-            { route: '/references', label: 'Received references' },
-            { route: '/references/written', label: 'Written references' },
-          ] } />
+          <Tabs
+            routes={[
+              { route: '/references', label: 'Received references' },
+              { route: '/references/written', label: 'Written references' },
+            ]}
+          />
 
           <Switch>
             <Route exact path="/references">

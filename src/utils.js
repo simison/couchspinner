@@ -12,14 +12,21 @@ export function formatDate(date) {
     return date;
   }
   const dateString = date.replace(' UTC', '');
-  const formattedDate = new Date(dateString).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+  const formattedDate = new Date(dateString).toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 
-  return formattedDate && formattedDate !== 'Invalid Date' ? formattedDate : date;
+  return formattedDate && formattedDate !== 'Invalid Date'
+    ? formattedDate
+    : date;
 }
 
-export const scrollToRef = ref => ref.current.scrollIntoView({
-  behavior: 'smooth'
-});
+export const scrollToRef = ref =>
+  ref.current.scrollIntoView({
+    behavior: 'smooth',
+  });
 
 /**
  * Test if browser supports sessionStorage or localStorage
@@ -30,18 +37,18 @@ export const scrollToRef = ref => ref.current.scrollIntoView({
  * @return {[Boolean]}
  */
 export function testStorage(type) {
-    var storage;
-    try {
-      storage = window[type];
-      var x = '__storage_test__';
-      storage.setItem(x, x);
-      storage.removeItem(x);
-      return true;
-    }
-    catch(e) {
-      return e instanceof DOMException && (
-        // everything except Firefox
-        e.code === 22 ||
+  var storage;
+  try {
+    storage = window[type];
+    var x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      // everything except Firefox
+      (e.code === 22 ||
         // Firefox
         e.code === 1014 ||
         // test name field too, because code might not be present
@@ -49,7 +56,9 @@ export function testStorage(type) {
         e.name === 'QuotaExceededError' ||
         // Firefox
         e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
-        // acknowledge QuotaExceededError only if there's something already stored
-        (storage && storage.length !== 0);
-    }
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
 }

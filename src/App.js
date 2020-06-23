@@ -1,5 +1,5 @@
-import React, {useCallback, useState, useEffect, createRef} from 'react';
-import {useDropzone} from 'react-dropzone';
+import React, { useCallback, useState, useEffect, createRef } from 'react';
+import { useDropzone } from 'react-dropzone';
 import jszip from 'jszip';
 import classnames from 'classnames';
 
@@ -32,11 +32,14 @@ async function getJsonFromZip(zip) {
 }
 
 async function getImagesFromZip(zip) {
-  const files =  zip.filter((relativePath, zipEntry) => {
-    return !zipEntry.dir && ['jpg', 'gif', 'png'].includes(zipEntry.name.split('.').pop());
+  const files = zip.filter((relativePath, zipEntry) => {
+    return (
+      !zipEntry.dir &&
+      ['jpg', 'gif', 'png'].includes(zipEntry.name.split('.').pop())
+    );
   });
 
-  const imageProcessor = files.map(async (file) => {
+  const imageProcessor = files.map(async file => {
     const blob = await zip.file(file.name).async('blob');
     const urlCreator = window.URL || window.webkitURL;
     const blobUrl = urlCreator.createObjectURL(blob);
@@ -88,7 +91,7 @@ function getNamesFromJson(json) {
 function setCacheValue(key, value) {
   try {
     window.sessionStorage.setItem(`${STORAGE_PREFIX}_${key}`, value);
-  } catch(error) {
+  } catch (error) {
     console.error(error);
   }
 }
@@ -97,10 +100,20 @@ function App() {
   const isStorageAvailable = testStorage('sessionStorage');
 
   // Re-hydrade previous cache
-  const cachedFileDate = isStorageAvailable && window.sessionStorage.getItem(`${STORAGE_PREFIX}_file_date`);
-  const cachedProfile = isStorageAvailable && JSON.parse(window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile`));
-  const cachedProfileImages = isStorageAvailable && JSON.parse(window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile_images`));
-  const cachedNames = cachedProfile ? getNamesFromJson(cachedProfile) : new Map();
+  const cachedFileDate =
+    isStorageAvailable &&
+    window.sessionStorage.getItem(`${STORAGE_PREFIX}_file_date`);
+  const cachedProfile =
+    isStorageAvailable &&
+    JSON.parse(window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile`));
+  const cachedProfileImages =
+    isStorageAvailable &&
+    JSON.parse(
+      window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile_images`),
+    );
+  const cachedNames = cachedProfile
+    ? getNamesFromJson(cachedProfile)
+    : new Map();
 
   const [profile, setProfile] = useState(cachedProfile || EXAMPLE_PROFILE);
   const [profileImages, setProfileImages] = useState(cachedProfileImages || []);
@@ -111,7 +124,7 @@ function App() {
 
   // Store for the browser session — gets cleaared out when closing tab but not on page refresh
   useEffect(() => {
-    if(isStorageAvailable) {
+    if (isStorageAvailable) {
       setCacheValue('file_date', fileDate);
       setCacheValue('profile_images', JSON.stringify(profileImages));
       setCacheValue('profile', JSON.stringify(profile));
@@ -131,7 +144,9 @@ function App() {
 
     if (!['application/zip', 'application/json'].includes(file.type)) {
       setIsProcessing(false);
-      return alert('Please drop either the zip file or json file.\n\nE.g. "couchsurfing-export-123456-202005200751.zip", or "123456-202005200751.json"');
+      return alert(
+        'Please drop either the zip file or json file.\n\nE.g. "couchsurfing-export-123456-202005200751.zip", or "123456-202005200751.json"',
+      );
     }
 
     setFileDate(file.lastModifiedDate);
@@ -157,27 +172,31 @@ function App() {
     setIsProcessing(false);
   }, []);
 
-  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <div className={ classnames( 'App', { 'is-processing': isProcessing } ) }>
-      { profile
-        ? <Profile
-            fileDate={ fileDate }
-            images={ profileImages }
-            names={ names }
-            profile={ profile }
-          />
-        : (
-          <>
-            <div className={ classnames( 'drop-container', { 'is-dropping': isDragActive } ) } {...getRootProps()}>
-              <input {...getInputProps() } />
-              <Intro aboutRef={ ref }/>
-            </div>
-            <About ref={ ref }/>
-          </>
-        )
-      }
+    <div className={classnames('App', { 'is-processing': isProcessing })}>
+      {profile ? (
+        <Profile
+          fileDate={fileDate}
+          images={profileImages}
+          names={names}
+          profile={profile}
+        />
+      ) : (
+        <>
+          <div
+            className={classnames('drop-container', {
+              'is-dropping': isDragActive,
+            })}
+            {...getRootProps()}
+          >
+            <input {...getInputProps()} />
+            <Intro aboutRef={ref} />
+          </div>
+          <About ref={ref} />
+        </>
+      )}
     </div>
   );
 }

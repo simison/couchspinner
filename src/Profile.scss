@@ -5,7 +5,8 @@
   background: $grey-light4;
   border: 5px solid transparent;
   color: $grey-medium4;
-  font-family: Lato, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: Lato, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
+    sans-serif;
   font-feature-settings: 'kern', 'liga', 'pnum';
   line-height: 1.5;
   min-height: 100vh;
@@ -28,7 +29,6 @@
     text-decoration: none;
   }
 }
-
 
 .is-dropping .Profile {
   background-color: $grey-light5;
