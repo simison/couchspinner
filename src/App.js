@@ -1,7 +1,7 @@
-import React, { useCallback, useState, useEffect, createRef } from 'react';
 import { useDropzone } from 'react-dropzone';
-import jszip from 'jszip';
 import classnames from 'classnames';
+import jszip from 'jszip';
+import React, { useCallback, useState, useEffect, createRef } from 'react';
 
 import './App.scss';
 import About from './About';
@@ -92,8 +92,32 @@ function setCacheValue(key, value) {
   try {
     window.sessionStorage.setItem(`${STORAGE_PREFIX}_${key}`, value);
   } catch (error) {
-    console.error(error);
+    console.error(`Saving ${key} in cache failed:`, error);
   }
+}
+
+/**
+ * Read file from Blob or File entry
+ * @param  {[File|Blob]}
+ * @return {[String]} Text contents of the File
+ */
+function readBlobFile(file) {
+  // Browser supports Blob.text(), all good!
+  // https://developer.mozilla.org/en-US/docs/Web/API/Blob/text
+  if (typeof file.text === 'function') {
+    return file.text();
+  }
+
+  // Namely Safari needs this
+  // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsText
+  // https://stackoverflow.com/a/46568146
+  return new Promise((resolve, reject) => {
+    var fr = new FileReader();
+    fr.onload = () => {
+      resolve(fr.result);
+    };
+    fr.readAsText(file);
+  });
 }
 
 function App() {
@@ -158,7 +182,8 @@ function App() {
       setNames(names);
       setProfileImages(images);
     } else if (file.type === 'application/json') {
-      const jsonProfile = await file.text();
+      const jsonProfile = await readBlobFile(file);
+
       try {
         const json = JSON.parse(jsonProfile);
         const names = getNamesFromJson(json);
