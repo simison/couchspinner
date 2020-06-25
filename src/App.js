@@ -120,28 +120,54 @@ function readBlobFile(file) {
   });
 }
 
+/**
+ * Load previously cached items
+ * @return {[Object]}
+ */
+function loadFromCache() {
+  let cachedFileDate;
+  let cachedNames;
+  let cachedProfile;
+  let cachedProfileImages;
+  try {
+    cachedFileDate = window.sessionStorage.getItem(
+      `${STORAGE_PREFIX}_file_date`,
+    );
+    cachedProfile = JSON.parse(
+      window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile`),
+    );
+    cachedProfileImages = JSON.parse(
+      window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile_images`),
+    );
+
+    if (cachedProfile) {
+      cachedNames = getNamesFromJson(cachedProfile);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+
+  return {
+    cachedFileDate,
+    cachedNames,
+    cachedProfile,
+    cachedProfileImages,
+  };
+}
+
 function App() {
   const isStorageAvailable = testStorage('sessionStorage');
 
-  // Re-hydrade previous cache
-  const cachedFileDate =
-    isStorageAvailable &&
-    window.sessionStorage.getItem(`${STORAGE_PREFIX}_file_date`);
-  const cachedProfile =
-    isStorageAvailable &&
-    JSON.parse(window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile`));
-  const cachedProfileImages =
-    isStorageAvailable &&
-    JSON.parse(
-      window.sessionStorage.getItem(`${STORAGE_PREFIX}_profile_images`),
-    );
-  const cachedNames = cachedProfile
-    ? getNamesFromJson(cachedProfile)
-    : new Map();
+  const {
+    cachedFileDate,
+    cachedNames,
+    cachedProfile,
+    cachedProfileImages,
+  } = isStorageAvailable ? loadFromCache() : {};
 
   const [profile, setProfile] = useState(cachedProfile || EXAMPLE_PROFILE);
   const [profileImages, setProfileImages] = useState(cachedProfileImages || []);
-  const [names, setNames] = useState(cachedNames);
+  const [names, setNames] = useState(cachedNames || new Map());
   const [fileDate, setFileDate] = useState(cachedFileDate || false);
   const [isProcessing, setIsProcessing] = useState(false);
   const ref = createRef();
