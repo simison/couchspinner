@@ -1,17 +1,21 @@
 /**
  * Give out pretty date
  *
- * Dates on CS exports are in format:
- * 2007-01-11 22:29:44 UTC
- *
- * @param  {String} date Date as a string
+ * @param  {String|Date object} date Date as a string or Date object
  * @return {String}
  */
 export function formatDate(date) {
   if (!date) {
     return date;
   }
-  const dateString = date.replace(' UTC', '');
+
+  let dateString;
+
+  // Dates on CS exports are in format "2007-01-11 22:29:44 UTC"
+  if (typeof date !== 'object') {
+    dateString = date.replace(' UTC', '');
+  }
+
   const formattedDate = new Date(dateString).toLocaleDateString(undefined, {
     year: 'numeric',
     month: 'long',
