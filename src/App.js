@@ -1,4 +1,5 @@
 import { useDropzone } from 'react-dropzone';
+import * as Sentry from '@sentry/browser';
 import classnames from 'classnames';
 import jszip from 'jszip';
 import React, { useCallback, useState, useEffect, createRef } from 'react';
@@ -26,7 +27,8 @@ async function getJsonFromZip(zip) {
   try {
     const json = JSON.parse(jsonString);
     return json;
-  } catch {
+  } catch (error) {
+    Sentry.captureException(error);
     return false;
   }
 }
@@ -92,6 +94,7 @@ function setCacheValue(key, value) {
   try {
     window.sessionStorage.setItem(`${STORAGE_PREFIX}_${key}`, value);
   } catch (error) {
+    Sentry.captureException(error);
     console.error(`Saving ${key} in cache failed:`, error);
   }
 }
@@ -144,6 +147,7 @@ function loadFromCache() {
       cachedNames = getNamesFromJson(cachedProfile);
     }
   } catch (error) {
+    Sentry.captureException(error);
     console.error(error);
   }
 
@@ -215,8 +219,12 @@ function App() {
         const names = getNamesFromJson(json);
         setProfile(json);
         setNames(names);
-      } catch {
-        alert('File is little too funky for us to understand... 😥');
+      } catch (error) {
+        Sentry.captureException(error);
+        console.error(error);
+        alert(
+          'File is little too funky for us to understand...  😥\n\nMake sure you uploaded correct export file (it should be .json or .zip file).\n\nIf problem persists, feel free to get in touch with Mikael (https://mikaelkorpela.fi/#contact).',
+        );
       }
     }
 
