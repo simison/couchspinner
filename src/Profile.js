@@ -1,5 +1,6 @@
-import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import * as Sentry from '@sentry/browser';
+import React from 'react';
 
 import './Profile.scss';
 import { formatDate } from './utils';
@@ -30,6 +31,15 @@ function Profile({ fileDate, images, names, profile }) {
     { route: '/raw', label: 'Raw' },
   ];
 
+  const clearSessionStorage = () => {
+    try {
+      window.sessionStorage.clear();
+    } catch (error) {
+      Sentry.captureException(error);
+      console.error(error);
+    }
+  };
+
   return (
     <Router>
       <div className="Profile">
@@ -41,11 +51,7 @@ function Profile({ fileDate, images, names, profile }) {
               </CsProfileLink>
               {fileDate && ` as of ${formatDate(fileDate)}`}
             </em>
-            <a
-              href="/"
-              className="Profile-clear"
-              onClick={() => window.sessionStorage.clear()}
-            >
+            <a href="/" className="Profile-clear" onClick={clearSessionStorage}>
               Clear out the profile
             </a>
           </p>

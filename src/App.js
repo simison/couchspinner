@@ -11,7 +11,7 @@ import Profile from './Profile';
 import { testStorage } from './utils';
 import { STORAGE_PREFIX } from './constants';
 // import example from './example-profile.json';
-const EXAMPLE_PROFILE = false;
+const EXAMPLE_PROFILE = '';
 
 async function getJsonFromZip(zip) {
   const files = zip.filter((relativePath, zipEntry) => {
@@ -172,11 +172,11 @@ function App() {
   const [profile, setProfile] = useState(cachedProfile || EXAMPLE_PROFILE);
   const [profileImages, setProfileImages] = useState(cachedProfileImages || []);
   const [names, setNames] = useState(cachedNames || new Map());
-  const [fileDate, setFileDate] = useState(cachedFileDate || false);
+  const [fileDate, setFileDate] = useState(cachedFileDate || '');
   const [isProcessing, setIsProcessing] = useState(false);
   const ref = createRef();
 
-  // Store for the browser session — gets cleaared out when closing tab but not on page refresh
+  // Store for the browser session — gets cleared out when closing tab but not on page refresh
   useEffect(() => {
     if (isStorageAvailable) {
       setCacheValue('file_date', fileDate);
@@ -188,6 +188,11 @@ function App() {
   // On uploading file(s)
   const onDrop = useCallback(async acceptedFiles => {
     setIsProcessing(true);
+
+    if (!acceptedFiles || acceptedFiles.length === 0) {
+      setIsProcessing(false);
+      return alert('No files? 😥');
+    }
 
     if (acceptedFiles.length !== 1) {
       setIsProcessing(false);
@@ -203,7 +208,9 @@ function App() {
       );
     }
 
-    setFileDate(file.lastModifiedDate);
+    if (file.lastModifiedDate) {
+      setFileDate(file.lastModifiedDate.toString());
+    }
 
     if (file.type === 'application/zip') {
       const { json, images } = await extractZip(file);
