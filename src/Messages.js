@@ -3,9 +3,9 @@ import marked from 'marked';
 
 import './Messages.scss';
 import { formatDate } from './utils';
-import { Section, Heading, Content, CsProfileLink } from './components';
+import { Section, Heading, Content, CsProfileName } from './components';
 
-function Messages({ messages, userId }) {
+function Messages({ messages, userId, names }) {
   const [openThread, setOpenThread] = useState(false);
 
   return (
@@ -31,7 +31,12 @@ function Messages({ messages, userId }) {
                 <div className="Message" key={threadId}>
                   <div className="Message-meta">
                     {profileIds.map(profileId => (
-                      <CsProfileLink id={profileId} key={profileId} />
+                      <CsProfileName
+                        className="Profile-reference-type"
+                        names={names}
+                        id={profileId}
+                        key={profileId}
+                      />
                     ))}
                     {thread?.updated_at && (
                       <span className="Message-date">
