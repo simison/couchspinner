@@ -80,6 +80,15 @@ const About = forwardRef(({ isDragActive, input, aboutRef }, ref) => {
         </p>
 
         <h3>
+          It didn't work! <Anchor id="it-did-not-work" />
+        </h3>
+        <p>
+          Oh no!{' '}
+          <a href="https://couchspinner.wordpress.com/">Please get in touch</a>{' '}
+          with Mikael to see if we can help.
+        </p>
+
+        <h3>
           What are other alternatives to CouchSurfing?{' '}
           <Anchor id="couchsurfing-alternatives" />
         </h3>
