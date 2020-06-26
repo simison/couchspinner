@@ -207,6 +207,13 @@ function App() {
 
     if (file.type === 'application/zip') {
       const { json, images } = await extractZip(file);
+      if (!json) {
+        setIsProcessing(false);
+        return alert(
+          'Please drop a zip file which contains the profile json file.\n\nE.g. "couchsurfing-export-123456-202005200751.zip", or "123456-202005200751.json"',
+        );
+      }
+
       const names = getNamesFromJson(json);
       setProfile(json);
       setNames(names);
