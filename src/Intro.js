@@ -12,12 +12,14 @@ function Intro({ aboutRef }) {
   return (
     <div className="App-landing-section Intro">
       <h1>CouchSpinner</h1>
-      <h2>Preview Couchsurfing profile exports</h2>
+      <h2>Preview Couchsurfing profile export files</h2>
       {/* https://www.flaticon.com/free-icon/sofa_2965901?term=sofa&page=1&position=39 */}
       <img src={sofa} className="Intro-logo" alt="logo" />
-      <div className="Intro-instructions">
-        <p>Drop the export file here, or click to select it.</p>
-      </div>
+      <button className="Intro-instructions">
+        Drop the file here,
+        <br />
+        or click to select it.
+      </button>
       <p>
         <a
           href="#about"

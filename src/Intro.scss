@@ -25,7 +25,27 @@ a.Intro-by-link {
 }
 
 .Intro-instructions {
-  max-width: 700px;
+  background: #1b2027;
+  border-radius: 5px;
+  border: 1px solid #000;
+  box-shadow: 1px 1px 1px #000;
+  color: #e49723;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 20px 0;
+  max-width: 400px;
+  padding: 15px 40px;
+  transition: box-shadow 200ms linear;
+  &:hover,
+  &:active {
+    box-shadow: 1px 1px 6px #000;
+    color: #f1cb85;
+    outline: none;
+  }
+  &:focus {
+    border-color: #e49723;
+    outline: none;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
