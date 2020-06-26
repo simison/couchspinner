@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import * as Sentry from '@sentry/browser';
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 
 import './Profile.scss';
 import { formatDate } from './utils';
-import { Section, CsProfileLink, Tabs } from './components';
+import { Section, CsProfileLink, Tabs, Loading } from './components';
 import AboutMe from './AboutMe';
 import Friends from './Friends';
 import Images from './Images';
@@ -12,6 +12,10 @@ import Messages from './Messages';
 import Raw from './Raw';
 import References from './References';
 import TrustrootsTree from './trustroots-tree.svg';
+
+// Slow rendering elements
+const Messages = lazy(() => import('./Messages'));
+const References = lazy(() => import('./References'));
 
 function Profile({ fileDate, images, names, profile }) {
   const { user_data: user, interests, references, friends, messages } = profile;
@@ -72,17 +76,25 @@ function Profile({ fileDate, images, names, profile }) {
             <AboutMe user={user} interests={interests} />
           </Route>
           <Route path="/references">
-            <References
-              names={names}
-              references={references}
-              userId={user?.id}
-            />
+            <Suspense fallback={<Loading>References</Loading>}>
+              <References
+                names={names}
+                references={references}
+                userId={user?.id}
+              />
+            </Suspense>
           </Route>
           <Route path="/friends">
             <Friends names={names} friends={friends?.friends || []} />
           </Route>
           <Route path="/messages">
-            <Messages messages={messages?.messages || []} userId={user?.id} />
+            <Suspense fallback={<Loading>Messages</Loading>}>
+              <Messages
+                messages={messages?.messages || []}
+                userId={user?.id}
+                names={names}
+              />
+            </Suspense>
           </Route>
           <Route path="/images">
             <Images images={images} />

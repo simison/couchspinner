@@ -19,6 +19,21 @@ export function Content(props) {
   );
 }
 
+export function Loading({ children }) {
+  return (
+    <Section>
+      <Heading>{children || <span className="placeholder"></span>}</Heading>
+      <Content>
+        <span className="placeholder"></span>
+        <br />
+        <span className="placeholder"></span>
+        <br />
+        <span className="placeholder"></span>
+      </Content>
+    </Section>
+  );
+}
+
 export function CsProfileLink(props) {
   const label = props.children || 'Member';
   return !!props.id ? (

@@ -88,3 +88,24 @@ h3:hover .Anchor {
     }
   }
 }
+
+.placeholder {
+  background: $grey-medium;
+  min-height: 1em;
+  min-width: 100px;
+  max-width: 300px;
+  display: block;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
