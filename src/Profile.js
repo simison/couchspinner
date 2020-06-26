@@ -8,9 +8,7 @@ import { Section, CsProfileLink, Tabs, Loading } from './components';
 import AboutMe from './AboutMe';
 import Friends from './Friends';
 import Images from './Images';
-import Messages from './Messages';
 import Raw from './Raw';
-import References from './References';
 import TrustrootsTree from './trustroots-tree.svg';
 
 // Slow rendering elements
@@ -24,13 +22,13 @@ function Profile({ fileDate, images, names, profile }) {
     (references?.written_references?.length ?? 0) +
     (references?.received_references?.length ?? 0);
   const friendsCount = friends?.friends?.length ?? 0;
-  // const messagesCount = messages?.messages?.length ?? 0;
+  const messagesCount = messages?.messages?.length ?? 0;
   const imagesCount = images?.length ?? 0;
   const routes = [
     { route: '/', label: 'About me' },
     { route: '/references', label: 'References', count: referencesCount },
     { route: '/friends', label: 'Friends', count: friendsCount },
-    // { route: '/messages', label: 'Messages', count: messagesCount },
+    { route: '/messages', label: 'Messages', count: messagesCount },
     { route: '/images', label: 'Images', count: imagesCount },
     { route: '/raw', label: 'Raw' },
   ];
@@ -91,8 +89,8 @@ function Profile({ fileDate, images, names, profile }) {
             <Suspense fallback={<Loading>Messages</Loading>}>
               <Messages
                 messages={messages?.messages || []}
-                userId={user?.id}
                 names={names}
+                userId={user?.id}
               />
             </Suspense>
           </Route>

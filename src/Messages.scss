@@ -2,7 +2,65 @@
 
 .Message {
   padding: 30px 0;
+  width: 100%;
+  border: 1px solid transparent;
   border-top: 1px solid $grey-light;
+  background: transparent;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  cursor: pointer;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+
+  &:hover,
+  &:focus {
+    background: $grey-light6;
+  }
+  &:focus {
+    border-color: $orange;
+    outline: none;
+  }
+  &.is-open {
+    border-left-color: $orange;
+  }
+}
+
+.Message-thread-message {
+  border-top: 1px solid $grey-light;
+  padding: 20px;
+  z-index: 10;
+  &:first-of-type {
+    border-top: none;
+  }
+}
+
+.Message-thread-close {
+  margin: 0;
+  padding: 0;
+  background: none;
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  border: 0;
+  border-radius: 50%;
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  height: 50px;
+  background: $white;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid $grey-light;
+  font-size: 2em;
+  z-index: 20;
+  color: $orange;
+  &:focus,
+  &:hover {
+    background: $orange;
+    color: $white;
+  }
 }
 
 .Message-meta {
@@ -10,25 +68,36 @@
   justify-content: space-between;
 }
 
+.Message-count,
 .Message-date {
   color: $grey-light3;
   font-size: 0.9em;
 }
 
 .Message-preview {
-  max-height: 100px;
+  background: #e6e6e6;
+  border-radius: 8px;
+  margin: 0 0 5px 15px;
+  padding: 9px 15px;
+  max-width: 600px;
+  max-height: 37px;
   overflow: hidden;
-  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @media (max-width: 600px) {
+    margin: 10px 0;
+    max-width: 100%;
+  }
+
   &::after {
-    background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    bottom: 0;
+    border-bottom: 25px solid transparent;
+    border-left: 25px solid transparent;
+    border-top: 25px solid #e6e6e6;
     content: '';
-    height: 30px;
+    left: -15px;
     position: absolute;
-    width: 100%;
+    top: 0;
+    z-index: -1;
   }
 }

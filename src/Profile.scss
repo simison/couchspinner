@@ -4,30 +4,34 @@
 .Profile {
   background: $grey-light4;
   border: 5px solid transparent;
+  min-height: 100vh;
+  padding: 50px;
+}
+
+.ReactModal__Content,
+.Profile {
   color: $grey-medium4;
   font-family: Lato, 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
     sans-serif;
   font-feature-settings: 'kern', 'liga', 'pnum';
   line-height: 1.5;
-  min-height: 100vh;
-  padding: 50px;
+
+  a {
+    color: $blue;
+    text-decoration: none;
+
+    &:active,
+    &:focus,
+    &:hover {
+      color: $orange;
+      text-decoration: none;
+    }
+  }
 }
 
 .Profile-header {
   margin: 10px auto;
   max-width: 980px;
-}
-
-.Profile a {
-  color: $blue;
-  text-decoration: none;
-
-  &:active,
-  &:focus,
-  &:hover {
-    color: $orange;
-    text-decoration: none;
-  }
 }
 
 .is-dropping .Profile {
