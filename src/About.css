@@ -7,4 +7,17 @@
 
 .About-FAQ h3 {
   margin-top: 2.5em;
+  position: relative;
+  padding-left: 30px;
+  margin-left: -30px;
+}
+
+.About-FAQ h3 .Anchor {
+  display: none;
+  position: absolute;
+  left: 0;
+}
+
+.About-FAQ h3:hover .Anchor {
+  display: inline;
 }

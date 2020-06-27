@@ -1,7 +1,23 @@
 import React from 'react';
 
-import { Anchor } from './components';
+import { scrollToElementById } from './utils';
 import './About.css';
+
+function FaqHeading({ children, id }) {
+  return (
+    <h3 id={id}>
+      <a
+        className="Anchor"
+        href={`#${id}`}
+        onClick={scrollToElementById}
+        title="Link here"
+      >
+        #
+      </a>
+      {children}
+    </h3>
+  );
+}
 
 function About({ isDragActive, input }) {
   return (
@@ -9,29 +25,9 @@ function About({ isDragActive, input }) {
       <h1>About</h1>
 
       <div className="About-FAQ">
-        <h3>
-          Why CouchSpinner exists? <Anchor id="why-couchspinner-exists" />
-        </h3>
-        <p>
-          CouchSurfing locked out a significant portion of their community by{' '}
-          <a href="https://blog.couchsurfing.com/couchsurfing-needs-your-help/">
-            turning into a paid site overnight
-          </a>{' '}
-          on May 14, 2020.
-        </p>
-        <p>
-          You can recover your data from CouchSurfing, but what can you do with
-          it then?
-        </p>
-        <p>
-          With CouchSpinner, you can preview your profile, references, and
-          messages again!
-        </p>
-
-        <h3>
+        <FaqHeading id="how-can-i-export-my-couchsurfing-profile">
           How can I export my CouchSurfing profile?{' '}
-          <Anchor id="how-can-i-export-my-couchsurfing-profile" />
-        </h3>
+        </FaqHeading>
         <p>
           If you can still access your profile,{' '}
           <a href="https://support.couchsurfing.org/hc/en-us/articles/360045738353-Download-your-data">
@@ -48,18 +44,34 @@ function About({ isDragActive, input }) {
           .
         </p>
 
-        <h3>
+        <FaqHeading id="why-couchspinner-exists">
+          Why CouchSpinner exists?
+        </FaqHeading>
+        <p>
+          CouchSurfing locked out a significant portion of their community by{' '}
+          <a href="https://blog.couchsurfing.com/couchsurfing-needs-your-help/">
+            turning into a paid site overnight
+          </a>{' '}
+          on May 14, 2020.
+        </p>
+        <p>
+          You can recover your data from CouchSurfing, but what can you do with
+          it then?
+        </p>
+        <p>
+          With CouchSpinner, you can preview your profile, references, and
+          messages again!
+        </p>
+
+        <FaqHeading id="do-you-store-my-couchsurfing-profile">
           Do you store my CouchSurfing profile?{' '}
-          <Anchor id="do-you-store-my-couchsurfing-profile" />
-        </h3>
+        </FaqHeading>
         <p>
           Nope. Your profile is never uploaded to us — we never see it.
           Everything happens in your browser only. This is completely secure.
         </p>
 
-        <h3>
-          Who made this? <Anchor id="who-made-this" />
-        </h3>
+        <FaqHeading id="who-made-this">Who made this?</FaqHeading>
         <p>
           Folks behind{' '}
           <a href="https://www.trustroots.org/?ref=couchspinner">
@@ -79,19 +91,16 @@ function About({ isDragActive, input }) {
           </span>
         </p>
 
-        <h3>
-          It didn't work! <Anchor id="it-did-not-work" />
-        </h3>
+        <FaqHeading id="it-did-not-work">It didn't work!</FaqHeading>
         <p>
           Oh no!{' '}
           <a href="https://couchspinner.wordpress.com/">Please get in touch</a>{' '}
           with Mikael to see if we can help.
         </p>
 
-        <h3>
-          What are other alternatives to CouchSurfing?{' '}
-          <Anchor id="couchsurfing-alternatives" />
-        </h3>
+        <FaqHeading id="couchsurfing-alternatives">
+          What are other alternatives to CouchSurfing?
+        </FaqHeading>
         <p>
           You could check{' '}
           <a href="https://www.trustroots.org/?ref=couchspinner">Trustroots</a>,{' '}
@@ -100,16 +109,18 @@ function About({ isDragActive, input }) {
           <a href="https://hackercouch.com/">Hackercouch</a>.
         </p>
 
-        <h3>I see only some names, but not everyone?</h3>
+        <FaqHeading id="i-see-only-some-names">
+          I see only some names, but not everyone?
+        </FaqHeading>
         <p>
           Most of the Couchsurfing export doesn't contain names of other
           profiles, only user IDs. There are a few names available from "couch
           requests", which then we can show elsewhere too.
         </p>
 
-        <h3>
-          Not all my data is here! <Anchor id="not-all-my-data-is-here" />
-        </h3>
+        <FaqHeading id="not-all-my-data-is-here">
+          Not all my data is here!
+        </FaqHeading>
         <p>
           Could be! Please check the "raw" tab of your profile to browser what
           the file actually contains and what we are showing.
@@ -123,9 +134,7 @@ function About({ isDragActive, input }) {
           . You should reach out to CouchSurfing for any specifics, though.
         </p>
 
-        <h3>
-          Is this open-source? <Anchor id="is-this-open-source" />
-        </h3>
+        <FaqHeading id="is-this-open-source">Is this open-source?</FaqHeading>
         <p>
           <a href="https://github.com/simison/couchspinner">Yep!</a> Feel free
           to help out.

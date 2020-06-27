@@ -59,14 +59,6 @@ export function CsProfileName(props) {
   );
 }
 
-export function Anchor({ id }) {
-  return (
-    <a className="Anchor" href={`#${id}`} id={id} title="Link here">
-      #
-    </a>
-  );
-}
-
 export function Tabs({ routes }) {
   return (
     <ul className="Tabs">
