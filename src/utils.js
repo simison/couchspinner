@@ -27,10 +27,19 @@ export function formatDate(date) {
     : date;
 }
 
-export const scrollToRef = ref =>
-  ref.current.scrollIntoView({
-    behavior: 'smooth',
-  });
+export const scrollToElementById = event => {
+  event.stopPropagation();
+  event.preventDefault();
+  const hash = event?.target?.hash;
+  if (hash) {
+    const el = document.getElementById(hash.replace('#', ''));
+    if (el) {
+      el.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  }
+};
 
 /**
  * Test if browser supports sessionStorage or localStorage

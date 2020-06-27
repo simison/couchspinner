@@ -2,7 +2,7 @@ import { useDropzone } from 'react-dropzone';
 import * as Sentry from '@sentry/browser';
 import classnames from 'classnames';
 import jszip from 'jszip';
-import React, { useCallback, useState, useEffect, createRef } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 
 import './App.scss';
 import About from './About';
@@ -174,7 +174,6 @@ function App() {
   const [names, setNames] = useState(cachedNames || new Map());
   const [fileDate, setFileDate] = useState(cachedFileDate || '');
   const [isProcessing, setIsProcessing] = useState(false);
-  const ref = createRef();
 
   // Store for the browser session — gets cleared out when closing tab but not on page refresh
   useEffect(() => {
@@ -265,9 +264,9 @@ function App() {
             {...getRootProps()}
           >
             <input {...getInputProps()} />
-            <Intro aboutRef={ref} />
+            <Intro />
           </div>
-          <About ref={ref} />
+          <About />
         </>
       )}
     </div>

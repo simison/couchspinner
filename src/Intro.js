@@ -1,14 +1,10 @@
 import React from 'react';
 
 import './Intro.scss';
-import { scrollToRef } from './utils';
+import { scrollToElementById } from './utils';
 import sofa from './sofa.svg';
 
-const stopUploadsFromTriggering = event => {
-  event.stopPropagation();
-};
-
-function Intro({ aboutRef }) {
+function Intro() {
   return (
     <div className="App-landing-section Intro">
       <h1>CouchSpinner</h1>
@@ -22,20 +18,21 @@ function Intro({ aboutRef }) {
       </button>
       <p>
         <a
-          href="#about"
-          onClick={event => {
-            stopUploadsFromTriggering(event);
-            event.preventDefault();
-            scrollToRef(aboutRef);
-          }}
+          href="#how-can-i-export-my-couchsurfing-profile"
+          onClick={scrollToElementById}
         >
+          How do I get CouchSurfing profile export file?
+        </a>
+        <br />
+        <br />
+        <a href="#about" onClick={scrollToElementById}>
           Read more
         </a>
         <br />
         <br />
         <a
           className="Intro-by-link"
-          onClick={stopUploadsFromTriggering}
+          onClick={event => event.stopPropagation()}
           href="https://www.trustroots.org/?ref=couchspinner"
         >
           By Trustroots

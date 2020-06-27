@@ -1,11 +1,11 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import { Anchor } from './components';
 import './About.css';
 
-const About = forwardRef(({ isDragActive, input, aboutRef }, ref) => {
+function About({ isDragActive, input }) {
   return (
-    <div className="App-landing-section About" id="about" ref={ref}>
+    <div className="App-landing-section About" id="about">
       <h1>About</h1>
 
       <div className="About-FAQ">
@@ -133,6 +133,6 @@ const About = forwardRef(({ isDragActive, input, aboutRef }, ref) => {
       </div>
     </div>
   );
-});
+}
 
 export default About;
