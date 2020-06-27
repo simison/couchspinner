@@ -17,7 +17,7 @@ function Images({ images }) {
             </p>
           ))
         ) : (
-          <p>You had no images... :-(</p>
+          <p>You had no images… :-(</p>
         )}
       </Content>
     </Section>

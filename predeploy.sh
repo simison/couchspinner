@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Deploy precheck..."
+echo "Deploy precheck…"
 
 yarn build
 
