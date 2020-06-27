@@ -34,6 +34,7 @@ export const scrollToElementById = event => {
   if (hash) {
     const el = document.getElementById(hash.replace('#', ''));
     if (el) {
+      window.history.pushState({}, '', hash);
       el.scrollIntoView({
         behavior: 'smooth',
       });
