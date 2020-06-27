@@ -33,9 +33,9 @@ function Intro() {
         <a
           className="Intro-by-link"
           onClick={event => event.stopPropagation()}
-          href="https://www.trustroots.org/?ref=couchspinner"
+          href="https://www.trustroots.org/?ref=couchspinner&ref-location=intro"
         >
-          By Trustroots
+          By <span>Trustroots.org</span>
         </a>
       </p>
     </div>

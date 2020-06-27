@@ -64,6 +64,13 @@ function Profile({ fileDate, images, names, profile }) {
             <a href="/" className="Profile-clear" onClick={clearSessionStorage}>
               Clear out the profile
             </a>
+            <a
+              href="https://www.trustroots.org/?ref=couchspinner&ref-location=header"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Sign up at Trustroots.org
+            </a>
           </div>
         </div>
 

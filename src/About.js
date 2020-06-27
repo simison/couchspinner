@@ -63,22 +63,14 @@ function About({ isDragActive, input }) {
           messages again!
         </p>
 
-        <FaqHeading id="do-you-store-my-couchsurfing-profile">
-          Do you store my CouchSurfing profile?{' '}
-        </FaqHeading>
-        <p>
-          Nope. Your profile is never uploaded to us — we never see it.
-          Everything happens in your browser only. This is completely secure.
-        </p>
-
         <FaqHeading id="who-made-this">Who made this?</FaqHeading>
         <p>
           Folks behind{' '}
-          <a href="https://www.trustroots.org/?ref=couchspinner">
+          <a href="https://www.trustroots.org/?ref=couchspinner&ref-location=faq">
             Trustroots.org
           </a>
-          , a free and community ran hospitality exchange site alternative to
-          CouchSurfing.
+          , a free and community ran hospitality exchange site you can use
+          instead of CouchSurfing.
         </p>
         <p>
           We built the functionality anyway for Trustroots and wanted to give it
@@ -89,6 +81,14 @@ function About({ isDragActive, input }) {
           <span role="img" aria-hidden>
             🙂
           </span>
+        </p>
+
+        <FaqHeading id="do-you-store-my-couchsurfing-profile">
+          Do you store my CouchSurfing profile?{' '}
+        </FaqHeading>
+        <p>
+          Nope. Your profile is never uploaded to us — we never see it.
+          Everything happens in your browser only. This is completely secure.
         </p>
 
         <FaqHeading id="it-did-not-work">It didn't work!</FaqHeading>
@@ -103,8 +103,10 @@ function About({ isDragActive, input }) {
         </FaqHeading>
         <p>
           You could check{' '}
-          <a href="https://www.trustroots.org/?ref=couchspinner">Trustroots</a>,{' '}
-          <a href="https://www.bewelcome.org/">BeWelcome</a>,{' '}
+          <a href="https://www.trustroots.org/?ref=couchspinner&ref-location=faq">
+            Trustroots
+          </a>
+          , <a href="https://www.bewelcome.org/">BeWelcome</a>,{' '}
           <a href="https://www.warmshowers.org/">Warmshowers</a> and{' '}
           <a href="https://hackercouch.com/">Hackercouch</a>.
         </p>
