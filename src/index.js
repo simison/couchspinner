@@ -8,8 +8,7 @@ import App from './App';
 
 // JavaScript error logging
 Sentry.init({
-  dsn:
-    'https://dace55ddccfc480083c04f2a876322a3@o356100.ingest.sentry.io/5288459',
+  dsn: window.couchspinner_settings?.sentry || '',
 });
 
 ReactDOM.render(
