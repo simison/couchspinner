@@ -8,7 +8,12 @@ function Intro() {
   return (
     <div className="App-landing-section Intro">
       <h1>CouchSpinner</h1>
-      <h2>Preview Couchsurfing profile export files</h2>
+      <h2>
+        Preview Couchsurfing profile export files.{' '}
+        <a href="#about" onClick={scrollToElementById}>
+          Read more…
+        </a>
+      </h2>
       {/* https://www.flaticon.com/free-icon/sofa_2965901?term=sofa&page=1&position=39 */}
       <img src={sofa} className="Intro-logo" alt="logo" />
       <button className="Intro-instructions">
@@ -22,11 +27,6 @@ function Intro() {
           onClick={scrollToElementById}
         >
           How do I get CouchSurfing profile export file?
-        </a>
-        <br />
-        <br />
-        <a href="#about" onClick={scrollToElementById}>
-          Read more
         </a>
         <br />
         <br />
