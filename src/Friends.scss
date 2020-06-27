@@ -1,4 +1,20 @@
 .Friendist {
-  margin: 0 0 0 14px;
+  margin: 0;
   padding: 0;
+  list-style: none;
+
+  &.Friendlist-known li {
+    margin-bottom: 10px;
+  }
+}
+
+.Friendlist-tr {
+  float: right;
+
+  @media (max-width: 800px) {
+    display: block;
+    float: none;
+    clear: both;
+    margin-bottom: 15px;
+  }
 }
