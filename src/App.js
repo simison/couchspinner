@@ -159,6 +159,11 @@ function loadFromCache() {
   };
 }
 
+function scrollTop() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
 function App() {
   const isStorageAvailable = testStorage('sessionStorage');
 
@@ -224,6 +229,7 @@ function App() {
       setProfile(json);
       setNames(names);
       setProfileImages(images);
+      scrollTop();
     } else if (file.type === 'application/json') {
       const jsonProfile = await readBlobFile(file);
 
@@ -232,6 +238,7 @@ function App() {
         const names = getNamesFromJson(json);
         setProfile(json);
         setNames(names);
+        scrollTop();
       } catch (error) {
         Sentry.captureException(error);
         console.error(error);
