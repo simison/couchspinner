@@ -73,3 +73,15 @@ export function Tabs({ routes }) {
     </ul>
   );
 }
+
+export function Button(props) {
+  return props.href ? (
+    <a {...props} className={`Button ${props.className}`}>
+      {props.children}
+    </a>
+  ) : (
+    <button {...props} className={`Button ${props.className}`}>
+      {props.children}
+    </button>
+  );
+}

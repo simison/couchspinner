@@ -1,5 +1,22 @@
 @import '_colors.scss';
 
+.Button,
+a.Button {
+  background: transparent;
+  border: 2px solid $grey-medium;
+  color: $blue;
+  padding: 5px 10px;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:active,
+  &:hover,
+  &:focus {
+    outline: none;
+    border-color: $blue;
+  }
+}
+
 .Section {
   background-color: $white;
   border-bottom: 2px solid rgba(0, 0, 0, 0.15);

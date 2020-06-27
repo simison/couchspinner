@@ -4,7 +4,7 @@ import React, { Suspense, lazy } from 'react';
 
 import './Profile.scss';
 import { formatDate } from './utils';
-import { Section, CsProfileLink, Tabs, Loading } from './components';
+import { Section, CsProfileLink, Tabs, Loading, Button } from './components';
 import AboutMe from './AboutMe';
 import Friends from './Friends';
 import Images from './Images';
@@ -61,16 +61,20 @@ function Profile({ fileDate, images, names, profile }) {
             {user?.profile?.occupation && <h3>{user.profile.occupation}</h3>}
           </div>
           <div className="Profile-buttons">
-            <a href="/" className="Profile-clear" onClick={clearSessionStorage}>
+            <Button
+              href="/"
+              className="Profile-clear"
+              onClick={clearSessionStorage}
+            >
               Clear out the profile
-            </a>
-            <a
+            </Button>
+            <Button
               href="https://www.trustroots.org/signup?ref=couchspinner&ref-location=header"
               target="_blank"
               rel="noopener noreferrer"
             >
               Sign up Trustroots.org
-            </a>
+            </Button>
           </div>
         </div>
 

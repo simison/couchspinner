@@ -75,18 +75,8 @@
   }
 
   a {
-    background: transparent;
-    border: 2px solid $grey-medium;
     float: right;
-    padding: 5px 10px;
     margin: 0 0 10px 0;
-    float: right;
-
-    &:active,
-    &:hover,
-    &:focus {
-      border-color: $blue;
-    }
   }
 }
 
