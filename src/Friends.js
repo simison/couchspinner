@@ -19,8 +19,21 @@ function TrustrootsSearch({ search, label }) {
 }
 
 function FriendList({ className, list }) {
+  // Does at least one friend on the list have name or username?
+  const listHasNames = list.some(
+    ({ displayName, username }) => displayName || username,
+  );
+
   return (
     <ul className={classnames('Friendist', className)}>
+      {listHasNames && (
+        <li className="no-print">
+          We had their names from couch requests:
+          <strong className="Friendlist-tr-label">
+            Search them on Trustroots:
+          </strong>
+        </li>
+      )}
       {list.map(({ id, displayName, username }) => {
         return (
           <li key={id}>
@@ -32,7 +45,9 @@ function FriendList({ className, list }) {
             </strong>
             {(displayName || username) && (
               <span className="Friendlist-tr no-print">
-                Search on Trustroots{' '}
+                <span className="Friendlist-tr-label">
+                  Search on Trustroots{' '}
+                </span>
                 {displayName && (
                   <TrustrootsSearch search={displayName} label="by name" />
                 )}
@@ -40,7 +55,6 @@ function FriendList({ className, list }) {
                 {username && (
                   <TrustrootsSearch search={username} label="by username" />
                 )}
-                .
               </span>
             )}
           </li>
@@ -75,12 +89,6 @@ function Friends({ friends, names }) {
         {knownFriends.length > 0 && (
           <>
             <h3>Known friends</h3>
-            <p>
-              We had their names from your couch requests.{' '}
-              <span className="no-print">
-                You should look them up on Trustroots!
-              </span>
-            </p>
             <FriendList className="Friendlist-known" list={knownFriends} />
           </>
         )}
@@ -88,7 +96,8 @@ function Friends({ friends, names }) {
           <>
             <h3>Unknown friends</h3>
             <p>
-              Your export file does not have names for these members.{' '}
+              Your export file does not have names for these members.
+              <br />
               <span className="no-print">
                 Some of their profiles might be public so you could try see whom
                 they are.

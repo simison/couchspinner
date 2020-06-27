@@ -1,5 +1,6 @@
 .Friendist {
-  margin: 0;
+  margin: 0 0 40px 0;
+  clear: both;
   padding: 0;
   list-style: none;
 
@@ -16,5 +17,21 @@
     float: none;
     clear: both;
     margin-bottom: 15px;
+  }
+}
+
+.Friendist li > .Friendlist-tr-label {
+  float: right;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+}
+
+.Friendlist-tr > .Friendlist-tr-label {
+  display: none;
+
+  @media (max-width: 800px) {
+    display: inline;
   }
 }
