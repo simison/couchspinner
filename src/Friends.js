@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Section, Heading, Content, CsProfileName } from './components';
+import './Friends.scss';
 
 function AboutMe({ friends, names }) {
   return (
@@ -8,7 +9,7 @@ function AboutMe({ friends, names }) {
       <Heading>Friends</Heading>
       <Content>
         {friends.length ? (
-          <ul>
+          <ul className="Friendist">
             {friends.map(friend => {
               const id = parseInt(
                 friend.profile.replace(

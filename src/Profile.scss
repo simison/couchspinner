@@ -6,6 +6,12 @@
   border: 5px solid transparent;
   min-height: 100vh;
   padding: 50px;
+  @media (max-width: 600px) {
+    padding: 5px;
+    h1 {
+      font-size: 1.6em;
+    }
+  }
 }
 
 .ReactModal__Content,
@@ -32,6 +38,12 @@
 .Profile-header {
   margin: 10px auto;
   max-width: 980px;
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 600px) {
+    flex-direction: column-reverse;
+  }
 }
 
 .is-dropping .Profile {
@@ -46,7 +58,6 @@
 .promo {
   text-align: center;
   font-size: 1.5em;
-  font-weight: 300;
   margin-top: 40px;
 }
 
@@ -54,13 +65,32 @@
   width: 50px;
 }
 
-a.Profile-clear {
-  background: transparent;
-  border: 2px solid $grey-medium;
-  cursor: pointer;
-  float: right;
-  padding: 5px 10px;
+.Profile-buttons {
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 600px) {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid $grey-medium;
+  }
 
+  a {
+    background: transparent;
+    border: 2px solid $grey-medium;
+    float: right;
+    padding: 5px 10px;
+    margin: 0 0 10px 0;
+    float: right;
+
+    &:active,
+    &:hover,
+    &:focus {
+      border-color: $blue;
+    }
+  }
+}
+
+a.Profile-clear {
   &:active,
   &:hover,
   &:focus {

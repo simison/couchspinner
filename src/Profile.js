@@ -46,23 +46,25 @@ function Profile({ fileDate, images, names, profile }) {
     <Router>
       <div className="Profile">
         <div className="Profile-header">
-          <p>
+          <div>
             <em>
               <CsProfileLink id={user?.id}>
                 Your Couchsurfing.com profile
               </CsProfileLink>
               {fileDate && ` as of ${formatDate(fileDate)}`}
             </em>
+            <h1>
+              {user?.profile?.first_name && `${user.profile.first_name} `}
+              {user?.profile?.last_name && `${user.profile.last_name} `}
+              {user?.username && `(${user.username})`}
+            </h1>
+            {user?.profile?.occupation && <h3>{user.profile.occupation}</h3>}
+          </div>
+          <div className="Profile-buttons">
             <a href="/" className="Profile-clear" onClick={clearSessionStorage}>
               Clear out the profile
             </a>
-          </p>
-          <h1>
-            {user?.profile?.first_name && `${user.profile.first_name} `}
-            {user?.profile?.last_name && `${user.profile.last_name} `}
-            {user?.username && `(${user.username})`}
-          </h1>
-          {user?.profile?.occupation && <h3>{user.profile.occupation}</h3>}
+          </div>
         </div>
 
         <Section>
@@ -104,7 +106,7 @@ function Profile({ fileDate, images, names, profile }) {
 
         <div className="promo">
           <a
-            href="https://www.trustroots.org/?ref=couchspinner"
+            href="https://www.trustroots.org/?ref=couchspinner&ref-location=footer"
             target="_blank"
             rel="noopener noreferrer"
           >
