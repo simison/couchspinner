@@ -28,11 +28,11 @@ a.Intro-by-link {
 }
 
 .Intro-instructions {
-  background: #1b2027;
+  background: $grey-dark2;
   border-radius: 5px;
-  border: 1px solid #000;
-  box-shadow: 1px 1px 1px #000;
-  color: #e49723;
+  border: 1px solid $black;
+  box-shadow: 1px 1px 1px $black;
+  color: $orange2;
   cursor: pointer;
   font-size: 1em;
   margin: 20px 0;
@@ -41,12 +41,12 @@ a.Intro-by-link {
   transition: box-shadow 200ms linear;
   &:hover,
   &:active {
-    box-shadow: 1px 1px 6px #000;
-    color: #f1cb85;
+    box-shadow: 1px 1px 6px $black;
+    color: $orange-light;
     outline: none;
   }
   &:focus {
-    border-color: #e49723;
+    border-color: $orange2;
     outline: none;
   }
 }
