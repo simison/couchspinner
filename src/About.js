@@ -69,7 +69,7 @@ function About({ isDragActive, input }) {
           <a href="https://www.trustroots.org/?ref=couchspinner&ref-location=faq">
             Trustroots.org
           </a>
-          , a free and community ran hospitality exchange site you can use
+          , a free and community-run hospitality exchange site you can use
           instead of CouchSurfing.
         </p>
         <p>
@@ -107,7 +107,7 @@ function About({ isDragActive, input }) {
             Trustroots
           </a>
           , <a href="https://www.bewelcome.org/">BeWelcome</a>,{' '}
-          <a href="https://www.warmshowers.org/">Warmshowers</a> and{' '}
+          <a href="https://www.warmshowers.org/">Warmshowers</a>, and{' '}
           <a href="https://hackercouch.com/">Hackercouch</a>.
         </p>
 
@@ -124,7 +124,7 @@ function About({ isDragActive, input }) {
           Not all my data is here!
         </FaqHeading>
         <p>
-          Could be! Please check the "raw" tab of your profile to browser what
+          Could be! Please check the "raw" tab of your profile to see what
           the file actually contains and what we are showing.
         </p>
         <p>
