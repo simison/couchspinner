@@ -2,6 +2,8 @@
 
 ## Available Scripts
 
+install [yarn](https://classic.yarnpkg.com/en/docs/install).
+
 In the project directory, you can run:
 
 ### `yarn start`
