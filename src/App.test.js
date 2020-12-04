@@ -4,6 +4,6 @@ import App from './App';
 
 test('renders intro', () => {
   const { getByText } = render(<App />);
-  const element = getByText(/CouchSpinner/i);
+  const element = getByText('CouchSpinner');
   expect(element).toBeInTheDocument();
 });
