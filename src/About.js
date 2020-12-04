@@ -124,8 +124,8 @@ function About({ isDragActive, input }) {
           Not all my data is here!
         </FaqHeading>
         <p>
-          Could be! Please check the "raw" tab of your profile to see what
-          the file actually contains and what we are showing.
+          Could be! Please check the "raw" tab of your profile to see what the
+          file actually contains and what we are showing.
         </p>
         <p>
           The preview doesn't show everything, but also the file from
