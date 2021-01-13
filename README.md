@@ -65,6 +65,11 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ad
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
+## Downloading Friend Data
+
+There are some scripts that might help you download extra friend data. They're
+in the `scripts/download` directory. See the README in that folder for more.
+
 ## License
 
 [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
