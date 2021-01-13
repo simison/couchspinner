@@ -1,7 +1,12 @@
-# Exporting
+# Downloading
 
 If you want to create an export from your CouchSuring download, or a more
 "permanent" archive, you can use some of these scripts to achieve that.
+
+## Notes
+
+* This was run on Ubuntu, it hasn't been tested on any other operating system,
+  and due to grep weirdness it might not work on macOS. PRs welcome.
 
 ## Friend data
 
