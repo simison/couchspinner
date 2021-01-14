@@ -141,6 +141,19 @@ function About({ isDragActive, input }) {
           <a href="https://github.com/simison/couchspinner">Yep!</a> Feel free
           to help out.
         </p>
+
+        <FaqHeading id="friend-profiles-and-images">
+          Can I download images and profiles of my friends?
+        </FaqHeading>
+        <p>
+          Yes! See the{' '}
+          <a href="https://github.com/simison/couchspinner/tree/master/scripts/download">
+            scripts
+          </a>{' '}
+          that you can use directly from your computer to download your
+          Couchsurfing friend's profiles and images. You also need some
+          technical know-how. 😉
+        </p>
       </div>
     </div>
   );
