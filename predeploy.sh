@@ -2,6 +2,7 @@
 
 echo "Deploy precheck…"
 
+npx browserslist@latest --update-db
 yarn build
 
 # Ensure all routes always return the same page on Github pages
