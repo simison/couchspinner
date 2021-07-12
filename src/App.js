@@ -167,12 +167,8 @@ function scrollTop() {
 function App() {
   const isStorageAvailable = testStorage('sessionStorage');
 
-  const {
-    cachedFileDate,
-    cachedNames,
-    cachedProfile,
-    cachedProfileImages,
-  } = isStorageAvailable ? loadFromCache() : {};
+  const { cachedFileDate, cachedNames, cachedProfile, cachedProfileImages } =
+    isStorageAvailable ? loadFromCache() : {};
 
   const [profile, setProfile] = useState(cachedProfile || EXAMPLE_PROFILE);
   const [profileImages, setProfileImages] = useState(cachedProfileImages || []);
