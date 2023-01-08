@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import * as Sentry from '@sentry/browser';
 import React, { Suspense, lazy } from 'react';
 
@@ -43,7 +43,7 @@ function Profile({ fileDate, images, names, profile }) {
   };
 
   return (
-    <Router>
+    <BrowserRouter>
       <div className="Profile">
         <div className="Profile-header">
           <div>
@@ -82,38 +82,43 @@ function Profile({ fileDate, images, names, profile }) {
           <Tabs routes={routes} />
         </Section>
 
-        <Switch>
-          <Route exact path="/">
-            <AboutMe user={user} interests={interests} />
-          </Route>
-          <Route path="/references">
-            <Suspense fallback={<Loading>References</Loading>}>
-              <References
-                names={names}
-                references={references}
-                userId={user?.id}
-              />
-            </Suspense>
-          </Route>
-          <Route path="/friends">
-            <Friends names={names} friends={friends?.friends || []} />
-          </Route>
-          <Route path="/messages">
-            <Suspense fallback={<Loading>Messages</Loading>}>
-              <Messages
-                messages={messages?.messages || []}
-                names={names}
-                userId={user?.id}
-              />
-            </Suspense>
-          </Route>
-          <Route path="/images">
-            <Images images={images} />
-          </Route>
-          <Route path="/raw">
-            <Raw json={profile} />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={<AboutMe user={user} interests={interests} />}
+          />
+          <Route
+            path="/references"
+            element={
+              <Suspense fallback={<Loading>References</Loading>}>
+                <References
+                  names={names}
+                  references={references}
+                  userId={user?.id}
+                />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/friends"
+            element={<Friends names={names} friends={friends?.friends || []} />}
+          />
+          <Route
+            path="/messages"
+            element={
+              <Suspense fallback={<Loading>Messages</Loading>}>
+                <Messages
+                  messages={messages?.messages || []}
+                  names={names}
+                  userId={user?.id}
+                />
+              </Suspense>
+            }
+          />
+          <Route path="/images" element={<Images images={images} />} />
+          <Route path="/raw" element={<Raw json={profile} />} />
+        </Routes>
 
         <div className="promo">
           <a
@@ -129,7 +134,7 @@ function Profile({ fileDate, images, names, profile }) {
           </a>
         </div>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
