@@ -1,5 +1,5 @@
 import CopyToClipboard from 'copy-to-clipboard';
-import marked from 'marked';
+import { marked } from 'marked';
 import React from 'react';
 // import ReactDOMServer from 'react-dom/server';
 
