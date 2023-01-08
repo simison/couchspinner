@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import marked from 'marked';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { marked } from 'marked';
 
 import './References.scss';
 import { formatDate } from './utils';
@@ -153,72 +153,75 @@ function References({ references, userId, names }) {
   );
 
   return (
-    <Router>
-      <Section>
-        <Heading>References</Heading>
-        <Content>
-          <p>
-            {writtenReferences.length ? (
-              <>
-                <strong>{`${writtenReferences.length} written: `}</strong>
-                {`${countReferences(writtenReferences, 'positive')} positive, `}
-                {`${countReferences(
-                  writtenReferences,
-                  'neutral',
-                )} neutral, and `}
-                {`${countReferences(writtenReferences, 'negative')} negative.`}
-              </>
-            ) : (
-              `You didn't write references`
-            )}
-          </p>
-          <p>
-            {receivedReferences.length ? (
-              <>
-                <strong>{`${receivedReferences.length} received: `}</strong>
-                {`${countReferences(
-                  receivedReferences,
-                  'positive',
-                )} positive, `}
-                {`${countReferences(
-                  receivedReferences,
-                  'neutral',
-                )} neutral, and `}
-                {`${countReferences(receivedReferences, 'negative')} negative.`}
-              </>
-            ) : (
-              `You didn't receive references`
-            )}
-          </p>
+    <Section>
+      <Heading>References</Heading>
+      <Content>
+        <p>
+          {writtenReferences.length ? (
+            <>
+              <strong>{`${writtenReferences.length} written: `}</strong>
+              {`${countReferences(writtenReferences, 'positive')} positive, `}
+              {`${countReferences(writtenReferences, 'neutral')} neutral, and `}
+              {`${countReferences(writtenReferences, 'negative')} negative.`}
+            </>
+          ) : (
+            `You didn't write references`
+          )}
+        </p>
+        <p>
+          {receivedReferences.length ? (
+            <>
+              <strong>{`${receivedReferences.length} received: `}</strong>
+              {`${countReferences(receivedReferences, 'positive')} positive, `}
+              {`${countReferences(
+                receivedReferences,
+                'neutral',
+              )} neutral, and `}
+              {`${countReferences(receivedReferences, 'negative')} negative.`}
+            </>
+          ) : (
+            `You didn't receive references`
+          )}
+        </p>
 
-          <Tabs
-            routes={[
-              { route: '/references', label: 'Received references' },
-              { route: '/references/written', label: 'Written references' },
-            ]}
+        <Tabs
+          routes={[
+            { route: '/references', label: 'Received references' },
+            { route: '/references/written', label: 'Written references' },
+          ]}
+        />
+
+        <Routes>
+          <Route
+            exact
+            path="/references"
+            element={
+              <>
+                <h3>Received references</h3>
+                <ReferencesList
+                  list={receivedReferences}
+                  names={names}
+                  userId={userId}
+                />
+              </>
+            }
           />
-
-          <Switch>
-            <Route exact path="/references">
-              <h3>Received references</h3>
-              <ReferencesList
-                list={receivedReferences}
-                names={names}
-                userId={userId}
-              />
-            </Route>
-            <Route path="/references/written">
-              <h3>Written references</h3>
-              <ReferencesList
-                list={writtenReferences}
-                names={names}
-                userId={userId}
-              />
-            </Route>
-          </Switch>
-        </Content>
-      </Section>
-    </Router>
+          <Route
+            path="/references/written"
+            element={
+              <>
+                <h3>Written references</h3>
+                <ReferencesList
+                  list={writtenReferences}
+                  names={names}
+                  userId={userId}
+                />
+              </>
+            }
+          />
+        </Routes>
+      </Content>
+    </Section>
   );
 }
 
